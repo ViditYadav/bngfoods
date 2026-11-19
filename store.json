@@ -13,8 +13,8 @@
     "minOrder": 0,
     "whatsappApiKey": "",
     "orderEmailKey": "",
-    "sheetProductsCsv": "",
-    "sheetSettingsCsv": ""
+    "sheetProductsCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTP-1b2obPiNrPmbbna6-dcLTmGezD35iY8tW30jXXGI3RajFN8kY3RXwCFvjSnyB5CjW7KpOiy1xa_/pub?gid=1104685999&single=true&output=csv",
+    "sheetSettingsCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTP-1b2obPiNrPmbbna6-dcLTmGezD35iY8tW30jXXGI3RajFN8kY3RXwCFvjSnyB5CjW7KpOiy1xa_/pub?gid=1892210772&single=true&output=csv"
   },
   "categories": ["Spice Powders", "Whole Spices"],
   "products": [
