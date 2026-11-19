@@ -257,6 +257,18 @@
     .b2b-head .btn{min-height:46px}
     .b2b-alt{margin-top:7px}
   }
+
+  .sending{display:flex;flex-direction:column;align-items:center;gap:14px;padding:36px 0;color:var(--muted)}
+  .spin{width:44px;height:44px;border-radius:50%;border:4px solid #f3e2c4;border-top-color:var(--brand);animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .done-ok{text-align:center;padding:6px 4px 4px}
+  .done-ok .tick{width:72px;height:72px;margin:6px auto 10px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#3a9a44,#22742c);box-shadow:0 8px 20px rgba(34,116,44,.3)}
+  .done-ok .tick .ico{width:38px;height:38px}
+  .done-ok h3{font-family:Hind,Inter,sans-serif;font-size:22px;margin:4px 0 6px;color:var(--maroon)}
+  .done-ok p{margin:6px 0}
+  .done-ok [lang=hi]{font-family:Hind,Inter,sans-serif;font-size:16.5px}
+  .sum-wrap{margin-top:12px}
+  .sum-wrap summary{cursor:pointer;font-weight:600;color:var(--maroon);padding:6px 0}
 </style>
 </head>
 <body>
@@ -335,6 +347,7 @@ const ICONS = {
   grid:'<rect x="3.5" y="3.5" width="7" height="7" rx="2" fill="currentColor"/><rect x="13.5" y="3.5" width="7" height="7" rx="3.5" fill="currentColor" opacity=".7"/><rect x="3.5" y="13.5" width="7" height="7" rx="3.5" fill="currentColor" opacity=".7"/><rect x="13.5" y="13.5" width="7" height="7" rx="2" fill="currentColor"/>',
   chat:'<path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8Z" fill="currentColor"/><path d="M8.6 7.8c.3-.6.6-.6.9-.6h.6c.2 0 .5.1.6.5l.8 1.9c.1.3 0 .5-.1.7l-.5.6c-.2.2-.2.4 0 .6.7 1.1 1.6 2 2.7 2.6.2.1.5.1.6-.1l.7-.8c.2-.2.4-.3.7-.2l1.8.9c.3.1.4.4.4.6 0 .6-.3 1.5-1.4 1.9-1 .4-2.6.2-4.6-1.1-2.2-1.5-3.6-3.6-3.9-4.6-.4-1.2 0-2.3.1-2.9Z" fill="#fff"/>',
   copy:'<rect x="8" y="8" width="12" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 5.5V5a1.5 1.5 0 0 0-1.5-1.5h-9A1.5 1.5 0 0 0 4 5v9a1.5 1.5 0 0 0 1.5 1.5H6" fill="none" stroke="currentColor" stroke-width="2"/>',
+  check:'<path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>',
   bin:'<path d="M4 6.5h16M9.5 6.5V4.5h5v2M6 6.5l1 13a1.5 1.5 0 0 0 1.5 1.4h7a1.5 1.5 0 0 0 1.5-1.4l1-13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
 };
 const ico = n => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ""}</svg>`;
@@ -414,8 +427,7 @@ function lines(){
 }
 function totals(){
   const L = lines(), count = L.reduce((a,l) => a + l.q, 0), sub = L.reduce((a,l) => a + l.sum, 0);
-  const ship = sub && !(SHOP.freeShippingAbove && sub >= SHOP.freeShippingAbove) ? SHOP.shippingFee : 0;
-  return {L, count, sub, ship, total: sub + ship};
+  return {L, count, sub, total: sub};   // shipping is discussed on the follow-up call, never shown
 }
 let toastT;
 function toast(msg){ let el = $("#toast"); if(!el){ el = document.createElement("div"); el.id = "toast"; el.className = "toast"; el.setAttribute("role","status"); document.body.appendChild(el); }
@@ -474,11 +486,9 @@ function cartHTML(withTitle = true){
   const t = totals(), title = withTitle ? "<h2>Your order</h2>" : "";
   if(!t.count) return title + `<div class="cart-empty">Your cart is empty. Choose a pack size and add products to start.</div>`;
   const short = SHOP.minOrder && t.sub < SHOP.minOrder;
-  const hint = SHOP.freeShippingAbove && t.sub < SHOP.freeShippingAbove ? `<div class="note">Add ${inr(SHOP.freeShippingAbove - t.sub)} more for free shipping.</div>` : "";
+  const hint = "";
   return title + t.L.map(l => `<div class="line">${(l.p.packs[+l.k.split("|")[1]][2] || l.p.image) ? `<img class="thumb ${!l.p.packs[+l.k.split("|")[1]][2] && l.p.imageFit === "cover" ? "cover" : ""}" src="${esc(l.p.packs[+l.k.split("|")[1]][2] || l.p.image)}" alt="">` : ""}<div style="flex:1"><div class="n">${esc(l.p.name)} · ${esc(l.size)}</div><div class="s">${inr(l.price)} × ${l.q} = ${inr(l.sum)}</div></div>${qtyCtl(l.k)}</div>`).join("") + `
     <div class="totals">
-      <div><span>Subtotal</span><span>${inr(t.sub)}</span></div>
-      <div><span>Shipping</span><span>${t.ship ? inr(t.ship) : "Free"}</span></div>
       <div class="grand"><span>Total</span><span>${inr(t.total)}</span></div>
     </div>${hint}
     <div class="stack">
@@ -522,16 +532,10 @@ function renderForm(kind){
         <div class="err">Tell us what you'd like to order.</div>
         ${field("city", "City", 'autocomplete="address-level2"')}
       ` : `
-        <label for="f-address">Delivery address</label>
-        <textarea id="f-address" name="address" rows="3" autocomplete="street-address" placeholder="House / shop no., street, area, landmark">${esc(customer.address)}</textarea>
-        <div class="err">Please enter your delivery address.</div>
-        <div class="row">
-          <div>${field("city", "City", 'autocomplete="address-level2"', "Enter your city.")}</div>
-          <div>${field("pincode", "Pincode", 'inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="postal-code" enterkeyhint="next"', "Enter a 6-digit pincode.")}</div>
-        </div>
-        ${field("notes", "Notes (optional)", 'placeholder="Delivery instructions, GST number, etc."')}
+        ${field("city", "City (optional)", 'autocomplete="address-level2"')}
+        ${field("notes", "Notes (optional)", 'placeholder="Anything we should know, GST number, etc."')}
         <div class="totals" id="coTotals"></div>
-        <div class="note">Pay by UPI or bank transfer once we confirm your order and shipping on WhatsApp.</div>
+        <div class="note" lang="hi">BNG Foods टीम आपको पता और पेमेंट की जानकारी के लिए कॉल करेगी।<br>Our team will call you for address and payment details.</div>
       `}
       <div class="stack sticky"><button class="btn btn-primary" type="submit">${bulk ? ico("sack") + "Continue" : ico("chilli") + "Place order"}</button></div>
     </form>`;
@@ -543,45 +547,89 @@ function renderForm(kind){
 function coTotals(){
   const t = totals();
   $("#coTotals").innerHTML = `<div><span>${t.count} item${t.count===1?"":"s"}</span><span>${inr(t.sub)}</span></div>
-    <div><span>Shipping</span><span>${t.ship ? inr(t.ship) : "Free"}</span></div>
     <div class="grand"><span>Total</span><span>${inr(t.total)}</span></div>`;
 }
 function validate(bulk){
   let ok = true;
-  const chk = (id, bad) => { const el = $("#f-" + id); if(!el) return; el.classList.toggle("invalid", bad); if(bad){ if(ok) el.focus(); ok = false; } };
+  const chk = (id, bad) => { const el = $("#f-" + id); if(!el) return; el.classList.toggle("invalid", bad); if(bad){ if(ok){ el.focus(); el.scrollIntoView({block:"center", behavior:"smooth"}); } ok = false; } };
   const digits = (customer.phone || "").replace(/\D/g, "").slice(-10);
   chk("name", !(customer.name || "").trim());
   chk("phone", !/^[6-9]\d{9}$/.test(digits));
   if(bulk) chk("notes", !(customer.notes || "").trim());
   else {
-    chk("address", !(customer.address || "").trim());
-    chk("city", !(customer.city || "").trim());
-    chk("pincode", !/^[1-9]\d{5}$/.test((customer.pincode || "").trim()));
+    /* address & payment are collected on the follow-up call */
   }
   return ok;
 }
 
-function finish(bulk){
+// Sends the order automatically (no customer action needed), using whichever services are set up in store.json:
+//  - SHOP.whatsappApiKey  → CallMeBot: WhatsApp message to your own number
+//  - SHOP.orderEmailKey   → Web3Forms: email to your inbox
+// Returns true if at least one service accepted it.
+async function autoSend(subject, text){
+  const jobs = [];
+  const withTimeout = (p, ms = 12000) => Promise.race([p, new Promise((_, r) => setTimeout(() => r(new Error("timeout")), ms))]);
+  if(SHOP.whatsappApiKey){
+    const url = `https://api.callmebot.com/whatsapp.php?phone=${encodeURIComponent(SHOP.whatsapp)}&text=${encodeURIComponent(text)}&apikey=${encodeURIComponent(SHOP.whatsappApiKey)}`;
+    jobs.push(withTimeout(fetch(url, {mode: "no-cors"})).then(() => true));   // response is opaque; reaching the server counts as sent
+  }
+  if(SHOP.orderEmailKey){
+    jobs.push(withTimeout(fetch("https://api.web3forms.com/submit", {method: "POST", headers: {"Content-Type": "application/json", "Accept": "application/json"},
+      body: JSON.stringify({access_key: SHOP.orderEmailKey, subject, from_name: SHOP.name + " Website", message: text})}))
+      .then(r => r.json()).then(j => !!j.success));
+  }
+  if(!jobs.length) return false;
+  const res = await Promise.allSettled(jobs);
+  return res.some(r => r.status === "fulfilled" && r.value === true);
+}
+
+async function finish(bulk){
   const c = k => (customer[k] || "").trim();
-  let id, text;
+  const id = "BNG" + Date.now().toString(36).toUpperCase().slice(-6);
+  let text, subject;
   if(bulk){
-    text = [`*Bulk enquiry – ${SHOP.name}*`, ``, `Name: ${c("name")}`, `Phone: ${c("phone")}`, `Business: ${c("btype") || "Retailer / Kirana store"}`, ...(c("city") ? [`City: ${c("city")}`] : []), ``, `Requirement:`, c("notes")].join("\n");
+    subject = `Bulk enquiry #${id} – ${c("name")}`;
+    text = [`*Bulk enquiry – ${SHOP.name}*`, `Ref #${id}`, ``, `Name: ${c("name")}`, `Phone: ${c("phone")}`, `Business: ${c("btype") || "Retailer / Kirana store"}`, ...(c("city") ? [`City: ${c("city")}`] : []), ``, `Requirement:`, c("notes")].join("\n");
   } else {
     const t = totals();
-    id = "BNG" + Date.now().toString(36).toUpperCase().slice(-6);
+    subject = `New order #${id} – ${c("name")} – ${inr(t.total)}`;
     text = [`*New order – ${SHOP.name}*`, `Order #${id}`, ``,
       ...t.L.map(l => `${l.q} x ${l.p.name} (${l.size}) – ${inr(l.sum)}`), ``,
-      `Subtotal: ${inr(t.sub)}`, `Shipping: ${t.ship ? inr(t.ship) : "Free"}`, `*Total: ${inr(t.total)}*`, ``,
+      `*Total: ${inr(t.total)}*`, ``,
       `Name: ${c("name")}`, `Phone: ${c("phone")}`,
-      `Address: ${c("address")}, ${c("city")} – ${c("pincode")}`,
-      ...(c("notes") ? [`Notes: ${c("notes")}`] : [])].join("\n");
+      ...(c("city") ? [`City: ${c("city")}`] : []),
+      ...(c("notes") ? [`Notes: ${c("notes")}`] : []),
+      ``, `Call customer for address & payment.`].join("\n");
   }
   const wa = `https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(text)}`;
   sheetView = "done";
-  $("#sheet").innerHTML = head("Almost done") + `
-    <p>${bulk ? "Your enquiry is ready." : `Your order <b>#${id}</b> is ready.`} Tap below to send it to us on WhatsApp. ${bulk ? "We'll get back to you with pricing." : "Your order is confirmed once we reply."}</p>
+
+  // sending state
+  $("#sheet").innerHTML = head(bulk ? "Sending enquiry…" : "Placing order…") + `<div class="sending"><span class="spin"></span><p lang="hi">कृपया प्रतीक्षा करें… Please wait</p></div>`;
+  const sent = await autoSend(subject, text);
+
+  if(sent){
+    if(!bulk){ cart = {}; save(); render(); }
+    $("#sheet").innerHTML = head(bulk ? "Enquiry received" : "Order received") + `
+      <div class="done-ok">
+        <div class="tick">${ico("check")}</div>
+        <h3 lang="hi">${bulk ? "आपकी पूछताछ मिल गई है!" : "आपका ऑर्डर मिल गया है!"}</h3>
+        <p><b>${bulk ? "Ref" : "Order"} #${id}</b></p>
+        <p lang="hi">${bulk ? "BNG Foods टीम आपको थोक भाव के लिए जल्द ही कॉल करेगी।" : "BNG Foods टीम आपको पता और पेमेंट की जानकारी के लिए जल्द ही कॉल करेगी।"}</p>
+        <p>${bulk ? "Your enquiry is received. BNG Foods team will call you shortly with bulk pricing." : "Your order is received. BNG Foods team will call you shortly for address and payment details."}</p>
+        <p class="note">We'll call you on <b>${esc(c("phone"))}</b>. Questions? WhatsApp ${esc(SHOP.phoneDisplay)}</p>
+      </div>
+      <details class="sum-wrap"><summary>${bulk ? "View enquiry" : "View order details"}</summary><pre class="summary" id="summary">${esc(text)}</pre></details>
+      <div class="stack"><button class="btn btn-primary" data-close>${ico("basket")}${bulk ? "Back to shop" : "Continue shopping"}</button></div>`;
+    return;
+  }
+
+  // Fallback: auto-send not set up or failed → customer sends it on WhatsApp with one tap
+  $("#sheet").innerHTML = head("One last step") + `
+    <p lang="hi">ऑर्डर भेजने के लिए नीचे बटन दबाएं। WhatsApp खुलेगा, बस <b>Send</b> दबाएं।</p>
+    <p>${bulk ? "Your enquiry is ready." : `Your order <b>#${id}</b> is ready.`} Tap below. WhatsApp opens with the ${bulk ? "enquiry" : "order"} typed in; just press <b>Send</b>.</p>
     <div class="stack">
-      <a class="btn btn-wa" href="${wa}" target="_blank" rel="noopener" ${bulk ? "" : "data-sent"}>${ico("chat")}Send on WhatsApp</a>
+      <a class="btn btn-wa" href="${wa}" target="_blank" rel="noopener" data-sent="${bulk ? "bulk" : "order"}" data-ref="${id}">${ico("chat")}Send on WhatsApp</a>
       <button class="btn btn-ghost" data-copy>${ico("copy")}Copy details</button>
     </div>
     <p class="note">WhatsApp not opening? Copy the details and send them to ${esc(SHOP.phoneDisplay)} or ${esc(SHOP.email)}.</p>
@@ -601,7 +649,16 @@ document.addEventListener("click", async e => {
   else if("clear" in d){ cart = {}; save(); render(); }
   else if("close" in d) closeSheet();
   else if(t.id === "bar") openSheet("cart");
-  else if("sent" in d){ cart = {}; save(); setTimeout(render, 0); }
+  else if("sent" in d){
+    const bulk = d.sent === "bulk", ref = d.ref, phone = (customer.phone || "").trim();
+    if(!bulk){ cart = {}; save(); }
+    setTimeout(() => { render(); sheetView = "done";
+      $("#sheet").innerHTML = head("Thank you") + `<div class="done-ok"><div class="tick">${ico("check")}</div>
+        <h3 lang="hi">धन्यवाद! WhatsApp में Send दबाना न भूलें।</h3><p><b>${bulk ? "Ref" : "Order"} #${esc(ref)}</b></p>
+        <p lang="hi">${bulk ? "BNG Foods टीम आपको थोक भाव के लिए जल्द ही कॉल करेगी।" : "BNG Foods टीम आपको पता और पेमेंट की जानकारी के लिए जल्द ही कॉल करेगी।"}</p>
+        <p>Once you press Send in WhatsApp, BNG Foods team will call you on <b>${esc(phone)}</b>.</p></div>
+        <div class="stack"><button class="btn btn-primary" data-close>${ico("basket")}Continue shopping</button></div>`; }, 400);
+  }
   else if("copy" in d){
     try{ await navigator.clipboard.writeText($("#summary").textContent); t.textContent = "Copied"; }
     catch{ t.textContent = "Select the text below to copy"; }

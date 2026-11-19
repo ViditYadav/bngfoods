@@ -9,7 +9,7 @@ Online ordering site for BNG Foods spices. Customers choose products and pack si
 | File | What it is |
 |---|---|
 | `index.html` | The website (design and ordering logic). Usually no need to edit. |
-| `store.json` | **All products, prices, pack sizes, contact details and shipping settings.** Edit this file to update the site. |
+| `store.json` | **All products, prices, pack sizes, contact details and order settings.** Edit this file to update the site. |
 | `images/` | Logo, product pack photos and header background. |
 
 ## Common changes (edit `store.json`)
@@ -43,14 +43,33 @@ The photo is optional. Without it, a coloured block is shown.
 - `keywords` are extra search words (Hindi, English, Hinglish).
 - Put new photos in the `images` folder.
 
-**Contact, shipping and badges** – edit the `shop` section at the top:
+**Contact, order settings and badges** – edit the `shop` section at the top:
 
 - `whatsapp` – country code + number, no spaces or + (e.g. `917805003225`)
 - `phoneDisplay`, `email`
-- `shippingFee`, `freeShippingAbove`, `minOrder` (in ₹)
+- `minOrder` (in ₹, 0 = no minimum)
+- `whatsappApiKey`, `orderEmailKey` – automatic order sending (see below)
 - `badges` – the quality points shown under the header
 
 After editing, check the file is valid JSON (every item separated by a comma, no comma after the last item). You can paste it into https://jsonlint.com to check.
+
+## Automatic order sending (no customer action needed)
+
+When a customer taps **Place order**, the site can send the order to you automatically and show
+"आपका ऑर्डर मिल गया है! BNG Foods टीम आपको कॉल करेगी". Set up one or both (free):
+
+**WhatsApp to your own number – CallMeBot**
+1. Go to https://www.callmebot.com/blog/free-api-whatsapp-messages/
+2. Follow the steps: save their number in your phone and send them the activation message from your business WhatsApp.
+3. You receive an **API key** on WhatsApp.
+4. Put it in `store.json` → `"whatsappApiKey": "YOUR-KEY"`
+
+**Email to your inbox – Web3Forms**
+1. Go to https://web3forms.com and enter `Contact.bngfoods@gmail.com`.
+2. You receive an **Access Key** by email.
+3. Put it in `store.json` → `"orderEmailKey": "YOUR-KEY"`
+
+If neither key is set (or sending fails), customers get a one-tap **Send on WhatsApp** button instead.
 
 ## Testing locally
 

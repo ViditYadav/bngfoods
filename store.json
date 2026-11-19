@@ -10,9 +10,9 @@
     "whatsapp": "917805003225",
     "phoneDisplay": "+91 78050 03225",
     "email": "Contact.bngfoods@gmail.com",
-    "shippingFee": 60,
-    "freeShippingAbove": 999,
-    "minOrder": 199
+    "minOrder": 0,
+    "whatsappApiKey": "",
+    "orderEmailKey": ""
   },
   "categories": ["Spice Powders", "Whole Spices"],
   "products": [
