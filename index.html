@@ -94,7 +94,22 @@
   .swatch .dots{position:absolute;inset:0;opacity:.22;background-image:radial-gradient(rgba(0,0,0,.6) 1px,transparent 1.3px);background-size:9px 9px}
   .swatch.has-img{height:250px;padding:0;align-items:stretch;background:#fff !important;border-bottom:1px solid var(--line)}
   .swatch img{position:absolute;inset:10px;width:calc(100% - 20px);height:calc(100% - 20px);object-fit:contain;transition:transform .25s}
-  .item:hover .swatch img{transform:scale(1.04)}
+  /* ---- Living packets: float, 3D tilt, flip on size change ---- */
+  .swatch.has-img{perspective:700px;touch-action:pan-y}
+  .swatch.has-img img{--rx:0deg;--ry:0deg;--s:1;transform:rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--s));transition:transform .25s ease-out;will-change:transform;
+    filter:drop-shadow(0 10px 12px rgba(60,20,10,.18))}
+  .swatch.has-img:not(.cover) img{animation:floaty 4.2s ease-in-out infinite;animation-delay:var(--d,0s)}
+  @keyframes floaty{0%,100%{translate:0 0;rotate:-1.2deg}50%{translate:0 -7px;rotate:1.2deg}}
+  .swatch.cover img{filter:none;animation:kenburns 16s ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+  @keyframes kenburns{from{scale:1}to{scale:1.09}}
+  .swatch.has-img:hover img,.swatch.has-img.touching img{--s:1.05}
+  .swatch.has-img img.pop{animation:flipin .55s cubic-bezier(.2,.8,.3,1.2),floaty 4.2s ease-in-out .55s infinite}
+  .swatch.cover img.pop{animation:flipin .55s cubic-bezier(.2,.8,.3,1.2),kenburns 16s ease-in-out .55s infinite alternate}
+  @keyframes flipin{from{rotate:y 90deg;scale:.85;opacity:.3}to{rotate:y 0deg;scale:1;opacity:1}}
+  .swipe-hint{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);display:flex;gap:4px;z-index:2}
+  .swipe-hint i{width:5px;height:5px;border-radius:50%;background:rgba(110,18,18,.25)}
+  .swipe-hint i.on{background:var(--maroon);width:12px;border-radius:3px}
+  @media (prefers-reduced-motion: reduce){ .swatch.has-img img,.swatch.has-img img.pop{animation:none !important;transition:none} }
   .swatch.cover img{inset:0;width:100%;height:100%;object-fit:cover}
   .thumb.cover{object-fit:cover;border-radius:6px}
   .item .hn{font-size:13px;color:var(--maroon);font-weight:600;margin-top:-4px}
@@ -269,6 +284,55 @@
   .done-ok [lang=hi]{font-family:Hind,Inter,sans-serif;font-size:16.5px}
   .sum-wrap{margin-top:12px}
   .sum-wrap summary{cursor:pointer;font-weight:600;color:var(--maroon);padding:6px 0}
+
+  /* compact checkout: fits without scrolling */
+  .sheet .sheet-head{margin-bottom:2px}
+  .sheet .sheet-head h2{font-size:21px}
+  .sheet form label{margin:9px 0 4px;font-size:12.5px}
+  .sheet form .opt{font-weight:500;color:var(--muted)}
+  .sheet form input,.sheet form select{padding:9px 12px;min-height:42px}
+  .sheet form textarea{padding:9px 12px}
+  .sheet form .row{gap:10px}
+  .co-sum{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:10px 12px;background:#fff6e6;border:1px solid #f0dfbf;border-radius:10px;font-size:14px}
+  .co-sum b{font-size:16px;color:var(--maroon)}
+  .sheet form .note{margin-top:6px;font-size:12px;line-height:1.4}
+  .sheet .form-go{margin-top:12px}
+  @media (max-width:600px){
+    .sheet form input,.sheet form select,.sheet form textarea{min-height:44px;font-size:16px}
+    .sheet .btn{min-height:50px}
+    .sheet{padding-top:14px}
+  }
+
+  /* thank-you page */
+  .thanks{position:fixed;inset:0;z-index:50;background:#fbf7f0;overflow:auto;display:none}
+  .thanks.show{display:block;animation:tyIn .3s ease}
+  @keyframes tyIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .ty-top{background:linear-gradient(90deg,rgba(100,14,14,.94),rgba(100,14,14,.7) 50%,rgba(100,14,14,.94)),url(images/header-bg.svg) center/cover,#6e1212;border-bottom:3px solid var(--gold)}
+  .ty-bar{display:flex;align-items:center;gap:12px;height:76px}
+  .ty-bar img{height:60px}
+  .ty-bar span{color:#fff;font-family:Hind,Inter,sans-serif;font-size:18px;font-weight:600}
+  .ty-body{display:flex;justify-content:center;padding:28px 16px 40px}
+  .ty-card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);max-width:520px;width:100%;padding:28px 24px;text-align:center}
+  .ty-card .tick{width:84px;height:84px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#3a9a44,#22742c);box-shadow:0 10px 24px rgba(34,116,44,.3);animation:pop .5s cubic-bezier(.2,.8,.3,1.4)}
+  @keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+  .ty-card .tick .ico{width:44px;height:44px}
+  .ty-card h1{font-family:Hind,Inter,sans-serif;font-size:34px;margin:0;color:var(--maroon)}
+  .ty-card h2{font-family:Fraunces,serif;font-size:22px;margin:0 0 10px;color:var(--ink)}
+  .ty-ref{font-size:16px;margin:4px 0 12px}
+  .ty-hi{font-family:Hind,Inter,sans-serif;font-size:17px;line-height:1.55;margin:8px 0}
+  .ty-warn{background:#fff6e6;border:1px solid #f0dfbf;border-radius:10px;padding:9px 12px;font-size:14px}
+  .ty-actions{display:grid;gap:10px;margin-top:18px}
+  .ty-card .sum-wrap{text-align:left}
+
+  /* mobile: pouch images 30% smaller so more products fit on screen */
+  @media (max-width:600px){
+    .swatch,.swatch.has-img{width:80px !important;min-width:80px !important;min-height:104px !important}
+    .swatch img{inset:4px !important;width:calc(100% - 8px) !important;height:calc(100% - 8px) !important}
+    .swatch.cover img{inset:0 !important;width:100% !important;height:100% !important}
+    .swipe-hint{bottom:3px}
+    .swipe-hint i{width:4px;height:4px}.swipe-hint i.on{width:9px}
+    .swatch .pill.special{font-size:9.5px !important;padding:1px 5px !important;left:4px !important;top:4px !important}
+  }
 </style>
 </head>
 <body>
@@ -360,7 +424,7 @@ const key = (id, i) => `${id}|${i}`;
 function load(k, d){ try{ const v = JSON.parse(localStorage.getItem(k)); return v ?? d; }catch{ return d; } }
 function save(){ try{ localStorage.setItem("bng_cart2", JSON.stringify(cart)); localStorage.setItem("bng_cust2", JSON.stringify(customer)); }catch{} }
 
-let activeCat = "All", query = "", sheetView = null, lastQtyQuery = "";
+let activeCat = "All", query = "", sheetView = null, lastQtyQuery = "", justPicked = null;
 let selected = {};                                  // productId -> selected pack index
 let cart = load("bng_cart2", {});                   // "id|packIndex" -> qty
 let customer = load("bng_cust2", {name:"", phone:"", address:"", city:"", pincode:"", notes:""});
@@ -471,7 +535,7 @@ function renderCatalog(){
     <div class="grid">${ps.map(p => {
       const i = selected[p.id] ?? 0, pack = p.packs[i], k = key(p.id, i), img = pack[2] || p.image || "";
       return `<article class="item">
-        <div class="swatch ${img ? "has-img" : ""} ${img && p.imageFit === "cover" ? "cover" : ""}" style="background:${esc(p.color || "#c9a66b")}">${img ? `<img src="${esc(img)}" alt="${esc(p.name + " " + pack[0])}" loading="lazy">` : `<div class="dots"></div>`}<span class="pill ${p.featured ? "special" : ""}">${p.featured ? "Special" : esc(p.cat)}</span></div>
+        <div class="swatch ${img ? "has-img" : ""} ${img && p.imageFit === "cover" ? "cover" : ""}" data-pid="${p.id}" style="background:${esc(p.color || "#c9a66b")};--d:${(PRODUCTS.indexOf(p) % 5) * -0.8}s">${img ? `<img class="${justPicked === p.id ? "pop" : ""}" src="${esc(img)}" alt="${esc(p.name + " " + pack[0])}" loading="lazy" draggable="false">` : `<div class="dots"></div>`}${img && p.packs.length > 1 ? `<span class="swipe-hint" aria-hidden="true">${p.packs.map((_, j) => `<i class="${j === i ? "on" : ""}"></i>`).join("")}</span>` : ""}<span class="pill ${p.featured ? "special" : ""}">${p.featured ? "Special" : esc(p.cat)}</span></div>
         <div class="body">
           <h3>${esc(p.name)}</h3>${p.hindi ? `<div class="hn">${esc(p.hindi)}</div>` : ""}
           <p>${esc(p.desc)}</p>
@@ -487,7 +551,7 @@ function cartHTML(withTitle = true){
   if(!t.count) return title + `<div class="cart-empty">Your cart is empty. Choose a pack size and add products to start.</div>`;
   const short = SHOP.minOrder && t.sub < SHOP.minOrder;
   const hint = "";
-  return title + t.L.map(l => `<div class="line">${(l.p.packs[+l.k.split("|")[1]][2] || l.p.image) ? `<img class="thumb ${!l.p.packs[+l.k.split("|")[1]][2] && l.p.imageFit === "cover" ? "cover" : ""}" src="${esc(l.p.packs[+l.k.split("|")[1]][2] || l.p.image)}" alt="">` : ""}<div style="flex:1"><div class="n">${esc(l.p.name)} · ${esc(l.size)}</div><div class="s">${inr(l.price)} × ${l.q} = ${inr(l.sum)}</div></div>${qtyCtl(l.k)}</div>`).join("") + `
+  return title + t.L.map(l => `<div class="line">${(l.p.packs[+l.k.split("|")[1]][2] || l.p.image) ? `<img class="thumb ${l.p.imageFit === "cover" ? "cover" : ""}" src="${esc(l.p.packs[+l.k.split("|")[1]][2] || l.p.image)}" alt="">` : ""}<div style="flex:1"><div class="n">${esc(l.p.name)} · ${esc(l.size)}</div><div class="s">${inr(l.price)} × ${l.q} = ${inr(l.sum)}</div></div>${qtyCtl(l.k)}</div>`).join("") + `
     <div class="totals">
       <div class="grand"><span>Total</span><span>${inr(t.total)}</span></div>
     </div>${hint}
@@ -528,16 +592,18 @@ function renderForm(kind){
           ${["Retailer / Kirana store","Wholesaler / Distributor","Restaurant / Hotel / Caterer","Food manufacturer","Private label / Own brand","Other"].map(o => `<option ${customer.btype === o ? "selected" : ""}>${o}</option>`).join("")}
         </select>
         <label for="f-notes">What do you need?</label>
-        <textarea id="f-notes" name="notes" rows="4" placeholder="Products, quantity (kg), packing, frequency…">${esc(customer.notes || "")}</textarea>
+        <textarea id="f-notes" name="notes" rows="2" placeholder="Products, quantity (kg), packing, frequency…">${esc(customer.notes || "")}</textarea>
         <div class="err">Tell us what you'd like to order.</div>
-        ${field("city", "City", 'autocomplete="address-level2"')}
+        ${field("city", "City <span class=opt>(optional)</span>", 'autocomplete="address-level2"')}
       ` : `
-        ${field("city", "City (optional)", 'autocomplete="address-level2"')}
-        ${field("notes", "Notes (optional)", 'placeholder="Anything we should know, GST number, etc."')}
-        <div class="totals" id="coTotals"></div>
-        <div class="note" lang="hi">BNG Foods टीम आपको पता और पेमेंट की जानकारी के लिए कॉल करेगी।<br>Our team will call you for address and payment details.</div>
+        <div class="row">
+          <div>${field("city", "City <span class=opt>(optional)</span>", 'autocomplete="address-level2"')}</div>
+          <div>${field("notes", "Notes <span class=opt>(optional)</span>", 'placeholder="GST no., etc."')}</div>
+        </div>
+        <div class="co-sum" id="coTotals"></div>
+        <div class="note" lang="hi">BNG Foods टीम आपको पता और पेमेंट के लिए कॉल करेगी। · Our team will call you for address & payment.</div>
       `}
-      <div class="stack sticky"><button class="btn btn-primary" type="submit">${bulk ? ico("sack") + "Continue" : ico("chilli") + "Place order"}</button></div>
+      <div class="stack form-go"><button class="btn btn-primary" type="submit">${bulk ? ico("sack") + "Continue" : ico("chilli") + "Place order"}</button></div>
     </form>`;
   if(!bulk) coTotals();
   const form = $("#form");
@@ -546,8 +612,7 @@ function renderForm(kind){
 }
 function coTotals(){
   const t = totals();
-  $("#coTotals").innerHTML = `<div><span>${t.count} item${t.count===1?"":"s"}</span><span>${inr(t.sub)}</span></div>
-    <div class="grand"><span>Total</span><span>${inr(t.total)}</span></div>`;
+  $("#coTotals").innerHTML = `<span>${t.count} item${t.count===1?"":"s"}</span><b>Total ${inr(t.total)}</b>`;
 }
 function validate(bulk){
   let ok = true;
@@ -610,17 +675,7 @@ async function finish(bulk){
 
   if(sent){
     if(!bulk){ cart = {}; save(); render(); }
-    $("#sheet").innerHTML = head(bulk ? "Enquiry received" : "Order received") + `
-      <div class="done-ok">
-        <div class="tick">${ico("check")}</div>
-        <h3 lang="hi">${bulk ? "आपकी पूछताछ मिल गई है!" : "आपका ऑर्डर मिल गया है!"}</h3>
-        <p><b>${bulk ? "Ref" : "Order"} #${id}</b></p>
-        <p lang="hi">${bulk ? "BNG Foods टीम आपको थोक भाव के लिए जल्द ही कॉल करेगी।" : "BNG Foods टीम आपको पता और पेमेंट की जानकारी के लिए जल्द ही कॉल करेगी।"}</p>
-        <p>${bulk ? "Your enquiry is received. BNG Foods team will call you shortly with bulk pricing." : "Your order is received. BNG Foods team will call you shortly for address and payment details."}</p>
-        <p class="note">We'll call you on <b>${esc(c("phone"))}</b>. Questions? WhatsApp ${esc(SHOP.phoneDisplay)}</p>
-      </div>
-      <details class="sum-wrap"><summary>${bulk ? "View enquiry" : "View order details"}</summary><pre class="summary" id="summary">${esc(text)}</pre></details>
-      <div class="stack"><button class="btn btn-primary" data-close>${ico("basket")}${bulk ? "Back to shop" : "Continue shopping"}</button></div>`;
+    closeSheet(); showThanks({bulk, id, text, phone: c("phone"), viaWhatsApp: false});
     return;
   }
 
@@ -636,28 +691,90 @@ async function finish(bulk){
     <pre class="summary" id="summary">${esc(text)}</pre>`;
 }
 
+function pickPack(id, i){
+  const p = byId[id]; if(!p) return;
+  i = (i + p.packs.length) % p.packs.length;
+  if((selected[id] ?? 0) === i) return;
+  selected[id] = i; justPicked = id; renderCatalog(); justPicked = null;
+}
+// 3D tilt towards mouse / finger
+const tiltImg = sw => sw && sw.classList.contains("has-img") ? sw.querySelector("img") : null;
+document.addEventListener("pointermove", e => {
+  const sw = e.target.closest && e.target.closest(".swatch"); const img = tiltImg(sw); if(!img) return;
+  const r = sw.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+  img.style.setProperty("--ry", (x * 18).toFixed(1) + "deg"); img.style.setProperty("--rx", (-y * 14).toFixed(1) + "deg");
+}, {passive: true});
+document.addEventListener("pointerout", e => {
+  const sw = e.target.closest && e.target.closest(".swatch"); const img = tiltImg(sw); if(!img || sw.contains(e.relatedTarget)) return;
+  img.style.setProperty("--ry", "0deg"); img.style.setProperty("--rx", "0deg"); sw.classList.remove("touching");
+}, {passive: true});
+// Swipe left / right on a packet to change pack size (phones)
+let sw0 = null;
+document.addEventListener("touchstart", e => { const sw = e.target.closest(".swatch[data-pid]"); if(!sw) return; sw.classList.add("touching");
+  sw0 = {sw, x: e.touches[0].clientX, y: e.touches[0].clientY}; }, {passive: true});
+document.addEventListener("touchend", e => { if(!sw0) return; const {sw, x, y} = sw0; sw0 = null; sw.classList.remove("touching");
+  const t = e.changedTouches[0], dx = t.clientX - x, dy = t.clientY - y; const img = tiltImg(sw);
+  if(img){ img.style.setProperty("--ry", "0deg"); img.style.setProperty("--rx", "0deg"); }
+  if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5){ const id = sw.dataset.pid; pickPack(id, (selected[id] ?? 0) + (dx < 0 ? 1 : -1)); }
+}, {passive: true});
+
+/* ---------- Thank-you page (#thank-you) ---------- */
+function showThanks({bulk, id, text, phone, viaWhatsApp}){
+  let pg = $("#thanks");
+  if(!pg){ pg = document.createElement("section"); pg.id = "thanks"; pg.className = "thanks"; pg.setAttribute("role", "dialog"); pg.setAttribute("aria-modal", "true"); pg.setAttribute("aria-labelledby", "tyTitle"); document.body.appendChild(pg); }
+  const wa = `https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent((bulk ? "Ref #" : "Order #") + id + " – I have a question.")}`;
+  pg.innerHTML = `
+    <div class="ty-top"><div class="wrap ty-bar">${SHOP.logo ? `<img src="${esc(SHOP.logo)}" alt="${esc(SHOP.name)}">` : `<b>${esc(SHOP.name)}</b>`}<span lang="hi">${esc(SHOP.taglineHindi || "")}</span></div></div>
+    <div class="ty-body">
+      <div class="ty-card">
+        <div class="tick">${ico("check")}</div>
+        <h1 id="tyTitle" lang="hi">धन्यवाद!</h1>
+        <h2>Thank you${phone ? "" : ""}!</h2>
+        <p class="ty-ref">${bulk ? "Enquiry" : "Order"} <b>#${esc(id)}</b> ${viaWhatsApp ? "" : (bulk ? "received" : "received")}</p>
+        <p lang="hi" class="ty-hi">${bulk ? "आपकी पूछताछ हमें मिल गई है। BNG Foods टीम आपको थोक भाव के लिए जल्द ही कॉल करेगी।" : "आपका ऑर्डर हमें मिल गया है। BNG Foods टीम आपको पता और पेमेंट की जानकारी के लिए जल्द ही कॉल करेगी।"}</p>
+        <p>${bulk ? "BNG Foods team will call you shortly with bulk pricing." : "BNG Foods team will call you shortly for your address and payment details."}</p>
+        ${viaWhatsApp ? `<p class="ty-warn" lang="hi">WhatsApp में <b>Send</b> दबाना न भूलें। · Please make sure you pressed Send in WhatsApp.</p>` : ""}
+        ${phone ? `<p class="note">We'll call you on <b>${esc(phone)}</b></p>` : ""}
+        ${text ? `<details class="sum-wrap"><summary>${bulk ? "View enquiry" : "View order details"}</summary><pre class="summary">${esc(text)}</pre></details>` : ""}
+        <div class="ty-actions">
+          <button class="btn btn-primary" data-ty-close>${ico("basket")}Continue shopping</button>
+          <a class="btn btn-ghost" href="${wa}" target="_blank" rel="noopener">${ico("chat")}WhatsApp us</a>
+        </div>
+      </div>
+    </div>`;
+  pg.classList.add("show"); document.body.style.overflow = "hidden"; pg.scrollTop = 0;
+  try{ if(location.hash !== "#thank-you") history.pushState(null, "", "#thank-you"); }catch{}
+  setTimeout(() => { const b = pg.querySelector("[data-ty-close]"); b && b.focus(); }, 50);
+}
+function hideThanks(fromHistory){
+  const pg = $("#thanks"); if(!pg || !pg.classList.contains("show")) return;
+  pg.classList.remove("show"); document.body.style.overflow = "";
+  if(!fromHistory){ try{ if(location.hash === "#thank-you") history.back(); }catch{} }
+}
+window.addEventListener("hashchange", () => { if(location.hash !== "#thank-you") hideThanks(true); });
+window.addEventListener("popstate", () => { if(location.hash !== "#thank-you") hideThanks(true); });
+// a reload on #thank-you just shows the shop
+try{ if(location.hash === "#thank-you") history.replaceState(null, "", location.pathname + location.search); }catch{}
+
 /* ---------- Events ---------- */
 document.addEventListener("click", async e => {
   const t = e.target.closest("button,a"); if(!t) return;
   const d = t.dataset;
   if(d.inc) setQty(d.inc, (cart[d.inc] || 0) + 1);
   else if(d.dec) setQty(d.dec, (cart[d.dec] || 0) - 1);
-  else if(d.pick){ selected[d.pick] = +d.i; renderCatalog(); }
+  else if(d.pick){ pickPack(d.pick, +d.i); }
   else if(d.cat){ activeCat = d.cat; render(); }
   else if("checkout" in d) openSheet("checkout");
   else if("bulk" in d) openSheet("bulk");
   else if("clear" in d){ cart = {}; save(); render(); }
   else if("close" in d) closeSheet();
+  else if("tyClose" in d) hideThanks(false);
   else if(t.id === "bar") openSheet("cart");
   else if("sent" in d){
     const bulk = d.sent === "bulk", ref = d.ref, phone = (customer.phone || "").trim();
     if(!bulk){ cart = {}; save(); }
-    setTimeout(() => { render(); sheetView = "done";
-      $("#sheet").innerHTML = head("Thank you") + `<div class="done-ok"><div class="tick">${ico("check")}</div>
-        <h3 lang="hi">धन्यवाद! WhatsApp में Send दबाना न भूलें।</h3><p><b>${bulk ? "Ref" : "Order"} #${esc(ref)}</b></p>
-        <p lang="hi">${bulk ? "BNG Foods टीम आपको थोक भाव के लिए जल्द ही कॉल करेगी।" : "BNG Foods टीम आपको पता और पेमेंट की जानकारी के लिए जल्द ही कॉल करेगी।"}</p>
-        <p>Once you press Send in WhatsApp, BNG Foods team will call you on <b>${esc(phone)}</b>.</p></div>
-        <div class="stack"><button class="btn btn-primary" data-close>${ico("basket")}Continue shopping</button></div>`; }, 400);
+    const text = ($("#summary") || {}).textContent || "";
+    setTimeout(() => { render(); closeSheet(); showThanks({bulk, id: ref, text, phone, viaWhatsApp: true}); }, 400);
   }
   else if("copy" in d){
     try{ await navigator.clipboard.writeText($("#summary").textContent); t.textContent = "Copied"; }
@@ -668,6 +785,87 @@ $("#overlay").addEventListener("click", e => { if(e.target.id === "overlay") clo
 document.addEventListener("keydown", e => { if(e.key === "Escape") closeSheet(); });
 $("#search").addEventListener("input", e => { query = e.target.value; renderCatalog(); });
 
+/* ---------- Google Sheet connection ----------
+   store.json → shop.sheetProductsCsv / shop.sheetSettingsCsv = "Publish to web" CSV links of the two tabs.
+   Products tab: one row per pack size. Settings tab: Setting | Value. */
+function parseCSV(text){
+  const rows = []; let row = [], cell = "", q = false;
+  for(let i = 0; i < text.length; i++){
+    const ch = text[i];
+    if(q){ if(ch === '"'){ if(text[i+1] === '"'){ cell += '"'; i++; } else q = false; } else cell += ch; }
+    else if(ch === '"') q = true;
+    else if(ch === ","){ row.push(cell); cell = ""; }
+    else if(ch === "\n" || ch === "\r"){ if(ch === "\r" && text[i+1] === "\n") i++; row.push(cell); rows.push(row); row = []; cell = ""; }
+    else cell += ch;
+  }
+  if(cell !== "" || row.length){ row.push(cell); rows.push(row); }
+  return rows.filter(r => r.some(c => String(c).trim() !== ""));
+}
+const yes = v => /^(y|yes|true|1|haan|हाँ|हां)$/i.test(String(v || "").trim());
+const slug = t => norm(t).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "p" + Math.abs([...String(t)].reduce((h, c) => (h * 31 + c.charCodeAt(0)) | 0, 7));
+const imgPath = v => { v = String(v || "").trim(); if(!v) return ""; return /^(https?:|data:|\/|images\/)/i.test(v) ? v : "images/" + v; };
+function autoColor(name){
+  const n = norm(name);
+  if(/turmeric|haldi|हल्दी/.test(n)) return "#d98a14";
+  if(/chilli|chili|mirch|मिर्च/.test(n)) return "#b3141c";
+  if(/coriander|dhaniya|धनिया/.test(n)) return "#5f7a2c";
+  return ["#8b5a2b","#7d1616","#a0461f","#6b7a2c","#9a6a1c"][[...n].reduce((h, c) => h + c.charCodeAt(0), 0) % 5];
+}
+async function fetchCSV(url){
+  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 8000);
+  try{ const r = await fetch(url + (url.includes("?") ? "&" : "?") + "t=" + Date.now(), {signal: ctl.signal}); if(!r.ok) throw new Error(r.status); return parseCSV(await r.text()); }
+  finally{ clearTimeout(t); }
+}
+function headerIndex(head, ...names){ const h = head.map(x => norm(x)); for(const n of names){ const i = h.findIndex(x => x.startsWith(n)); if(i >= 0) return i; } return -1; }
+async function loadSheet(shop){
+  const out = {};
+  const [pr, st] = await Promise.allSettled([
+    shop.sheetProductsCsv ? fetchCSV(shop.sheetProductsCsv) : Promise.reject("none"),
+    shop.sheetSettingsCsv ? fetchCSV(shop.sheetSettingsCsv) : Promise.reject("none")]);
+  if(pr.status === "fulfilled" && pr.value.length > 1){
+    const [head, ...rows] = pr.value;
+    const I = {cat: headerIndex(head, "category"), name: headerIndex(head, "product"), hindi: headerIndex(head, "hindi"), desc: headerIndex(head, "description"),
+      size: headerIndex(head, "pack"), price: headerIndex(head, "price"), img: headerIndex(head, "image"), photo: headerIndex(head, "full photo"),
+      special: headerIndex(head, "special"), kw: headerIndex(head, "search"), show: headerIndex(head, "show")};
+    const map = new Map();
+    for(const r of rows){
+      const g = k => I[k] >= 0 ? String(r[I[k]] ?? "").trim() : "";
+      const name = g("name"), size = g("size"), price = parseFloat(g("price").replace(/[^\d.]/g, ""));
+      if(!name || !size || !(price > 0)) continue;
+      if(I.show >= 0 && g("show") && !yes(g("show"))) continue;
+      let p = map.get(name);
+      if(!p){
+        p = {id: slug(name), cat: g("cat") || "Products", name, hindi: g("hindi"), desc: g("desc"), color: autoColor(name + " " + g("hindi")),
+             keywords: g("kw") ? g("kw").split(/[,;]/).map(x => x.trim()).filter(Boolean) : [], featured: yes(g("special")), packs: []};
+        if(yes(g("photo"))) p.imageFit = "cover";
+        map.set(name, p);
+      }
+      const img = imgPath(g("img"));
+      p.packs.push(img ? [size, price, img] : [size, price]);
+      if(img && !p.image) p.image = img;
+      if(!p.desc && g("desc")) p.desc = g("desc");
+    }
+    out.products = [...map.values()];
+  }
+  if(st.status === "fulfilled"){
+    const set = {};
+    const keys = [["whatsapp api", "whatsappApiKey"], ["order email", "orderEmailKey"], ["whatsapp", "whatsapp"], ["phone", "phoneDisplay"], ["email", "email"],
+      ["minimum", "minOrder"], ["badge", "badges"], ["hindi", "taglineHindi"], ["tagline", "tagline"], ["brand", "name"], ["business name", "name"]];
+    for(const r of st.value){
+      const k = norm(r[0] || ""), v = String(r[1] ?? "").trim(); if(!k || /^setting/.test(k)) continue;
+      const hit = keys.find(([n]) => k.startsWith(n)); if(!hit) continue;
+      const f = hit[1];
+      if(f === "whatsapp"){ const d = v.replace(/\D/g, ""); if(d.length >= 10) set.whatsapp = d.length === 10 ? "91" + d : d; }
+      else if(f === "minOrder"){ const n = parseFloat(v.replace(/[^\d.]/g, "")); set.minOrder = n > 0 ? n : 0; }
+      else if(f === "badges"){ if(v) set.badges = v.split(/[,;|]/).map(x => x.trim()).filter(Boolean); }
+      else if(v || f === "whatsappApiKey" || f === "orderEmailKey") set[f] = v;
+    }
+    if(set.whatsapp && !set.phoneDisplay) set.phoneDisplay = "+" + set.whatsapp.replace(/^(\d{2})(\d{5})(\d{5})$/, "$1 $2 $3");
+    out.settings = set;
+  }
+  return out;
+}
+
 async function init(){
   try{
     const r = await fetch("store.json", {cache: "no-store"});
@@ -675,6 +873,10 @@ async function init(){
     const data = await r.json();
     SHOP = data.shop; PRODUCTS = data.products || [];
     CATS = data.categories?.length ? data.categories : [...new Set(PRODUCTS.map(p => p.cat))];
+    // Google Sheet (if linked) overrides products and settings; store.json stays as the backup
+    const sheet = await loadSheet(SHOP);
+    if(sheet.products && sheet.products.length){ PRODUCTS = sheet.products; CATS = [...new Set(PRODUCTS.map(p => p.cat))]; }
+    if(sheet.settings) Object.assign(SHOP, sheet.settings);
     PRODUCTS.forEach(p => { if(!CATS.includes(p.cat)) CATS.push(p.cat); });
   }catch(err){
     $("#catalog").innerHTML = `<div class="empty-search">Could not load products. Please refresh the page.</div>`;

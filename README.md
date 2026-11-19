@@ -12,6 +12,21 @@ Online ordering site for BNG Foods spices. Customers choose products and pack si
 | `store.json` | **All products, prices, pack sizes, contact details and order settings.** Edit this file to update the site. |
 | `images/` | Logo, product pack photos and header background. |
 
+## Manage products from a Google Sheet (recommended)
+
+Instead of editing `store.json`, you can manage everything from **BNG-Foods-Website-Sheet** (Google Sheets):
+prices, pack sizes, new products, hiding products, WhatsApp number, phone, email and badges.
+
+1. Upload `BNG-Foods-Website-Sheet.xlsx` to Google Drive → open it → **File → Save as Google Sheets**.
+2. **File → Share → Publish to web** → choose the **Products** tab and **Comma-separated values (.csv)** → **Publish** → copy the link.
+3. Do the same for the **Settings** tab.
+4. Paste the two links into `store.json`:
+   `"sheetProductsCsv": "<Products link>"`, `"sheetSettingsCsv": "<Settings link>"` and upload `store.json` to GitHub.
+
+From then on, edit the Google Sheet. The website picks up changes within about 5 minutes (Google refreshes published sheets every few minutes).
+New product photos: upload them to the `images` folder on GitHub and type the file name in the sheet's Image column.
+If the sheet can't be reached, the site uses the products in `store.json` as a backup.
+
 ## Common changes (edit `store.json`)
 
 **Change a price** – find the product and change the number after the pack size:

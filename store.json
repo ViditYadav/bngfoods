@@ -12,7 +12,9 @@
     "email": "Contact.bngfoods@gmail.com",
     "minOrder": 0,
     "whatsappApiKey": "",
-    "orderEmailKey": ""
+    "orderEmailKey": "",
+    "sheetProductsCsv": "",
+    "sheetSettingsCsv": ""
   },
   "categories": ["Spice Powders", "Whole Spices"],
   "products": [
