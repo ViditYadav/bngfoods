@@ -333,6 +333,48 @@
     .swipe-hint i{width:4px;height:4px}.swipe-hint i.on{width:9px}
     .swatch .pill.special{font-size:9.5px !important;padding:1px 5px !important;left:4px !important;top:4px !important}
   }
+
+  /* ===== Compact product cards (≈30% smaller) ===== */
+  .grid{grid-template-columns:repeat(auto-fill,minmax(224px,1fr));gap:12px}
+  .swatch{height:66px}
+  .swatch.has-img{height:170px}
+  .swatch img{inset:8px;width:calc(100% - 16px);height:calc(100% - 16px)}
+  .swatch .pill{font-size:10.5px;padding:2px 7px}
+  .body{padding:10px 12px 12px;gap:5px}
+  .item h3{font-size:14.5px;line-height:1.25}
+  .item .hn{font-size:12px;margin-top:-2px}
+  .item p{font-size:12.5px;line-height:1.35;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .item .body > .sizes{margin-top:auto}
+  .sizes{gap:5px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:1px}
+  .sizes::-webkit-scrollbar{display:none}
+  .size{flex:none;padding:4px 8px 4px 15px;font-size:11.5px;clip-path:polygon(7px 0,100% 0,100% 100%,7px 100%,0 50%)}
+  .size::before{left:6px;width:4px;height:4px;margin-top:-2px}
+  .foot{margin-top:2px}
+  .price{font-size:15px}
+  .price small{font-size:11px}
+  .add{padding:6px 12px 6px 10px;font-size:13.5px;gap:5px}
+  .qty button{width:26px;height:26px;font-size:15px}
+  .qty span{min-width:24px;font-size:14px}
+  h2.cat{font-size:19px;margin:16px 0 10px}
+  @media (max-width:600px){
+    .grid{gap:8px}
+    .swatch,.swatch.has-img{width:72px !important;min-width:72px !important;min-height:0 !important}
+    .body{padding:8px 10px 9px !important;gap:4px !important}
+    .item h3{font-size:14px}
+    .item .hn{font-size:11.5px;margin-top:-3px}
+    .size{min-height:30px !important;padding:5px 9px 5px 16px !important;font-size:12px !important}
+    .add{min-height:34px !important;padding:6px 13px 6px 11px !important;font-size:13.5px}
+    .qty button{width:32px !important;height:32px !important;font-size:16px !important}
+    .foot{margin-top:2px !important}
+    .price{font-size:15px}
+    h2.cat{font-size:17px;margin:10px 0 8px}
+    .item p{display:none !important}
+    .body{padding:7px 10px 7px !important;gap:3px !important}
+    .size{min-height:28px !important;padding:4px 9px 4px 16px !important}
+    .add{min-height:32px !important;padding:5px 12px 5px 10px !important}
+    .qty button{width:30px !important;height:30px !important}
+    .item h3{line-height:1.2}
+  }
 </style>
 </head>
 <body>
