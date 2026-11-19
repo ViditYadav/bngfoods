@@ -1,2 +1,0 @@
-# bngfoods
-website bng foods
