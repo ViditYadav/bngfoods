@@ -20,7 +20,9 @@
     "instagram": "",
     "youtube": "",
     "facebook": "",
-    "background": "Spices + village"
+    "background": "Spices + village",
+    "orderLogUrl": "https://script.google.com/macros/s/AKfycbwvimj05xQm6WE068Hq6LRdYcAybEJte9t13Ox2IlF9STlWH1VkQmI6G-iiEhaaz-1B2Q/exec",
+    "orderLogToken": "bng-ledger-2026"
   },
   "certificates": [
     {"id": "fssai", "name": "FSSAI Registration", "hindi": "एफएसएसएआई खाद्य पंजीकरण", "badge": "FSSAI Registered", "label": "FSSAI Reg. No.",
