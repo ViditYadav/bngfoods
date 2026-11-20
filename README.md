@@ -10,7 +10,22 @@ Online ordering site for BNG Foods spices. Customers choose products and pack si
 |---|---|
 | `index.html` | The website (design and ordering logic). Usually no need to edit. |
 | `store.json` | **All products, prices, pack sizes, contact details and order settings.** Edit this file to update the site. |
-| `images/` | Logo, product pack photos and header background. |
+| `images/` | Logo, product pack photos, header background, gallery photos/videos. |
+| `images/certificates/` | Photos or PDFs of your FSSAI, GST, Udyam and Gumasta certificates (page 1 only, personal details hidden). |
+
+## Pages
+
+The site has four pages, linked in the menu under the header (and in the footer):
+
+| Page | Link | What it shows |
+|---|---|---|
+| Shop | `yoursite/` | Products, cart, bulk enquiry (as before) |
+| Behind the Masala | `yoursite/#gallery` | Photos, videos and reels of your machines, grinding and packing |
+| Certificates | `yoursite/#certificates` | FSSAI, GST, Udyam and Gumasta certificates with Verify links |
+| Careers | `yoursite/#careers` | Job openings and an application form |
+
+You can share these links directly, e.g. on WhatsApp or Instagram.
+All forms (checkout, bulk enquiry, job application) ask for **Pincode** and **City**. Typing the pincode fills in the city automatically.
 
 ## Manage products from a Google Sheet (recommended)
 
@@ -19,9 +34,9 @@ prices, pack sizes, new products, hiding products, WhatsApp number, phone, email
 
 1. Upload `BNG-Foods-Website-Sheet.xlsx` to Google Drive → open it → **File → Save as Google Sheets**.
 2. **File → Share → Publish to web** → choose the **Products** tab and **Comma-separated values (.csv)** → **Publish** → copy the link.
-3. Do the same for the **Settings** tab.
-4. Paste the two links into `store.json`:
-   `"sheetProductsCsv": "<Products link>"`, `"sheetSettingsCsv": "<Settings link>"` and upload `store.json` to GitHub.
+3. Do the same for the **Settings**, **Gallery** and **Careers** tabs.
+4. Paste the links into `store.json`:
+   `"sheetProductsCsv"`, `"sheetSettingsCsv"`, `"sheetGalleryCsv"`, `"sheetCareersCsv"` and upload `store.json` to GitHub.
 
 From then on, edit the Google Sheet. The website picks up changes within about 5 minutes (Google refreshes published sheets every few minutes).
 New product photos: upload them to the `images` folder on GitHub and type the file name in the sheet's Image column.
@@ -64,9 +79,41 @@ The photo is optional. Without it, a coloured block is shown.
 - `phoneDisplay`, `email`
 - `minOrder` (in ₹, 0 = no minimum)
 - `whatsappApiKey`, `orderEmailKey` – automatic order sending (see below)
+- `instagram`, `youtube`, `facebook` – page links for the Behind the Masala page
 - `badges` – the quality points shown under the header
 
 After editing, check the file is valid JSON (every item separated by a comma, no comma after the last item). You can paste it into https://jsonlint.com to check.
+
+## Behind the Masala (photos, videos, reels)
+
+Add one entry per photo or video, in the sheet's **Gallery** tab or in `store.json` → `gallery`:
+
+```json
+{"src": "https://www.instagram.com/reel/XXXXXXX/", "title": "Grinding in our unit", "hindi": "हमारी यूनिट में पिसाई"}
+```
+
+`src` can be:
+- a YouTube link, a YouTube **Shorts** link, an **Instagram reel / post** link or a **Facebook** video/reel link (the post must be public)
+- a photo file name from the `images` folder (`machine-1.jpg`)
+- a short video file (`.mp4`). Keep files under ~20 MB; for longer videos use YouTube.
+
+Optional: `"cover": "machine-cover.jpg"` (photo shown before an Instagram/Facebook video plays), `"wide": true` (wide photo), `"show": false` (hide).
+Photos / Videos / Reels filter buttons appear automatically.
+Add your Instagram / YouTube / Facebook page links in the Settings tab (or `shop.instagram`, `shop.youtube`, `shop.facebook`) to show Follow buttons.
+
+## Certificates
+
+1. Take a clear photo or scan of each certificate (JPG). Before uploading, cover anything you don't want public, such as an Aadhaar or PAN number or home address.
+2. Upload to `images/certificates/` with these names: `fssai.jpg`, `gst.jpg`, `udyam.jpg`, `gumasta.jpg`. (A PDF also works: change `file` in `store.json` to e.g. `images/certificates/gst.pdf`.)
+3. Enter the numbers in the sheet's **Settings** tab (FSSAI Registration No., GSTIN, Udyam Registration No., Gumasta / Shop Act No.) or in `store.json` → `certificates` → `number`.
+
+Until a photo is uploaded the card says "Certificate copy coming soon". The FSSAI number is shown on the shop page and all numbers in the footer.
+
+## Careers
+
+Add a row in the sheet's **Careers** tab (or `store.json` → `careers`) and set **Show on Website** to Yes. Set it to No when the job is filled.
+Two example jobs (Machine Operator, Packing Staff) are already there, hidden.
+Applications arrive the same way as orders (WhatsApp / email). Applicants are asked to send their resume on WhatsApp afterwards.
 
 ## Automatic order sending (no customer action needed)
 

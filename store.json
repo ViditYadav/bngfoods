@@ -13,9 +13,41 @@
     "minOrder": 0,
     "whatsappApiKey": "",
     "orderEmailKey": "",
-    "sheetProductsCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTP-1b2obPiNrPmbbna6-dcLTmGezD35iY8tW30jXXGI3RajFN8kY3RXwCFvjSnyB5CjW7KpOiy1xa_/pub?gid=1104685999&single=true&output=csv",
-    "sheetSettingsCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTP-1b2obPiNrPmbbna6-dcLTmGezD35iY8tW30jXXGI3RajFN8kY3RXwCFvjSnyB5CjW7KpOiy1xa_/pub?gid=1892210772&single=true&output=csv"
+    "sheetProductsCsv": "",
+    "sheetSettingsCsv": "",
+    "sheetGalleryCsv": "",
+    "sheetCareersCsv": "",
+    "instagram": "",
+    "youtube": "",
+    "facebook": "",
+    "background": "Spices + village"
   },
+  "certificates": [
+    {"id": "fssai", "name": "FSSAI Registration", "hindi": "एफएसएसएआई खाद्य पंजीकरण", "badge": "FSSAI Registered", "label": "FSSAI Reg. No.",
+     "issuer": "Food Safety and Standards Authority of India · Food & Drugs Administration, Madhya Pradesh", "number": "21426001000300", "file": "images/certificates/fssai.jpg",
+     "verify": "https://foscos.fssai.gov.in/"},
+    {"id": "gst", "name": "GST Registration", "hindi": "जीएसटी रजिस्ट्रेशन", "badge": "GST Registered", "label": "GSTIN",
+     "issuer": "Goods and Services Tax, Government of India", "number": "23ABHFB2284M1ZB", "file": "images/certificates/gst.jpg",
+     "verify": "https://services.gst.gov.in/services/searchtp"},
+    {"id": "udyam", "name": "Udyam Registration (MSME)", "hindi": "उद्यम रजिस्ट्रेशन (MSME)", "badge": "Udyam (MSME) Registered", "label": "Udyam No.",
+     "issuer": "Ministry of MSME, Government of India · Micro enterprise, spice grinding & processing", "number": "UDYAM-MP-49-0116661", "file": "images/certificates/udyam.jpg",
+     "verify": "https://udyamregistration.gov.in/Udyam_Verify.aspx"},
+    {"id": "gumasta", "name": "Shop & Establishment (Gumasta) Registration", "hindi": "गुमास्ता / दुकान एवं स्थापना पंजीयन", "badge": "Gumasta Registered", "label": "Gumasta Reg. No.",
+     "issuer": "District Labour Office, Ujjain · MP Shops & Establishment Act, 1958", "number": "UJJA260820SE000647", "file": "images/certificates/gumasta.jpg",
+     "verify": "https://labour.mponline.gov.in/"}
+  ],
+  "gallery": [
+    {"src": "images/range.webp", "title": "Our spice powder range", "hindi": "हमारे पिसे मसाले", "wide": true},
+    {"src": "images/whole-turmeric.jpg", "title": "Turmeric fingers, cleaned and sorted", "hindi": "साफ़ और छँटी हुई साबुत हल्दी"},
+    {"src": "images/whole-chilli.jpg", "title": "Sun-dried whole red chillies", "hindi": "धूप में सूखी लाल मिर्च"},
+    {"src": "images/whole-coriander.jpg", "title": "Machine-cleaned coriander seeds", "hindi": "मशीन से साफ़ किया धनिया"}
+  ],
+  "careers": [
+    {"title": "Machine Operator (Grinding)", "hindi": "मशीन ऑपरेटर (पिसाई)", "location": "BNG Foods unit", "type": "Full-time", "experience": "1+ year", "salary": "As per experience",
+     "desc": "Run and clean the grinding machines, maintain hygiene, help with daily production.", "show": false},
+    {"title": "Packing Staff", "hindi": "पैकिंग स्टाफ", "location": "BNG Foods unit", "type": "Full-time", "experience": "Fresher can apply", "salary": "",
+     "desc": "Filling, weighing, sealing and labelling packs.", "show": false}
+  ],
   "categories": ["Spice Powders", "Whole Spices"],
   "products": [
     {"id": "turmeric-powder", "keywords": ["haldi", "haldi powder", "haladi", "हल्दी", "हलदी", "पिसी हल्दी", "turmeric", "powder", "पाउडर"], "cat": "Spice Powders", "name": "Turmeric Powder", "hindi": "हल्दी पाउडर",
@@ -36,14 +68,14 @@
 
     {"id": "turmeric-whole", "image": "images/whole-turmeric.jpg", "imageFit": "cover", "keywords": ["sabut haldi", "khadi haldi", "haldi gaanth", "haldi", "साबुत हल्दी", "खड़ी हल्दी", "हल्दी गांठ", "हल्दी", "whole", "sabut", "साबुत"], "cat": "Whole Spices", "name": "Whole Turmeric", "hindi": "साबुत हल्दी",
      "desc": "Dried turmeric fingers, cleaned and sorted.", "color": "#c98a1a",
-     "packs": [["500 g", 150], ["1 kg", 290], ["5 kg", 1400], ["20 kg", 5400], ["50 kg", 13000]]},
+     "packs": [["500 g", 150], ["1 kg", 290], ["5 kg", 1400], ["10 kg", 2800], ["30 kg", 8400], ["50 kg", 13000]]},
 
     {"id": "chilli-whole", "image": "images/whole-chilli.jpg", "imageFit": "cover", "keywords": ["sabut mirch", "sukhi mirch", "sukhi lal mirch", "khadi mirch", "mirch", "mirchi", "chilli", "chili", "साबुत मिर्च", "सूखी लाल मिर्च", "खड़ी मिर्च", "मिर्च", "मिर्ची", "लाल मिर्च", "whole", "sabut", "साबुत"], "cat": "Whole Spices", "name": "Whole Red Chilli", "hindi": "साबुत लाल मिर्च",
      "desc": "Sun-dried whole red chillies.", "color": "#a52a1e",
-     "packs": [["500 g", 200], ["1 kg", 390], ["5 kg", 1900], ["20 kg", 7400], ["50 kg", 18000]]},
+     "packs": [["500 g", 200], ["1 kg", 390], ["5 kg", 1900], ["10 kg", 3800], ["30 kg", 11400], ["50 kg", 18000]]},
 
     {"id": "coriander-whole", "image": "images/whole-coriander.jpg", "imageFit": "cover", "keywords": ["sabut dhaniya", "dhaniya beej", "dhaniya", "dhania", "seeds", "साबुत धनिया", "धनिया बीज", "धनिया", "whole", "sabut", "साबुत"], "cat": "Whole Spices", "name": "Coriander Seeds", "hindi": "साबुत धनिया",
      "desc": "Whole coriander seeds, machine-cleaned.", "color": "#8b7d3a",
-     "packs": [["500 g", 100], ["1 kg", 190], ["5 kg", 900], ["20 kg", 3500], ["50 kg", 8500]]}
+     "packs": [["500 g", 100], ["1 kg", 190], ["5 kg", 900], ["10 kg", 1800], ["30 kg", 5400], ["50 kg", 8500]]}
   ]
 }

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="150" viewBox="0 0 1200 150">
+<g fill="none" stroke="#7d1616" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".14">
+  <!-- hills / fields -->
+  <path d="M0 118C120 92 240 96 360 112S600 128 720 104 960 86 1080 104 1200 118 1200 118"/>
+  <path d="M0 132C160 118 300 122 460 132S760 140 920 126 1200 128 1200 128"/>
+  <path d="M380 112l40 28M410 114l38 26M440 116l36 24M470 118l34 22M500 120l32 20"/>
+  <path d="M820 104l-40 34M850 102l-38 34M880 100l-36 34M910 100l-34 34"/>
+  <!-- sun -->
+  <path d="M640 70a26 26 0 0 1 52 0"/><path d="M666 34v-10M640 44l-7-7M692 44l7-7M628 64h-10M704 64h10"/>
+  <!-- farmhouse -->
+  <g transform="translate(170 64)"><path d="M0 40V14L22-4 44 14v26Z"/><path d="M-6 16 22-8l28 24"/><path d="M16 40V26h12v14"/><rect x="30" y="18" width="8" height="8"/><path d="M44 40h40V20H44M44 20 62 8l22 12"/></g>
+  <!-- trees -->
+  <g transform="translate(90 70)"><circle cx="0" cy="0" r="18"/><path d="M0 18v24M-6 30l6-6 6 6"/></g>
+  <g transform="translate(300 78)"><circle cx="0" cy="0" r="13"/><path d="M0 13v22"/></g>
+  <g transform="translate(560 72)"><path d="M0-22C14-22 20-8 14 2-4 10-18 2-16-8-14-18-8-22 0-22Z"/><path d="M0 4v32"/></g>
+  <g transform="translate(1000 66)"><circle cx="-10" cy="4" r="14"/><circle cx="8" cy="-2" r="16"/><path d="M0 14v26"/></g>
+  <!-- small hut -->
+  <g transform="translate(1080 86)"><path d="M0 24V8h30v16M-4 10 15-6l19 16"/><path d="M12 24v-9h7v9"/></g>
+  <!-- chilli plants -->
+  <g transform="translate(760 92)"><path d="M0 22V0M0 8l-8-6M0 4l8-6M0 14l9-4"/><path d="M-8 2c-2 4-1 8 1 10M8-2c3 3 3 8 1 10"/></g>
+  <!-- birds -->
+  <path d="M420 36q6-6 12 0 6-6 12 0M470 26q5-5 10 0 5-5 10 0M860 30q6-6 12 0 6-6 12 0"/>
+</g></svg>
