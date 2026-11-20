@@ -1382,6 +1382,8 @@ async function loadSheet(shop){
   return out;
 }
 
+// Call links dial the number that is SHOWN (phoneDisplay); WhatsApp orders still go to SHOP.whatsapp
+function telHref(){ let d = String(SHOP.phoneDisplay || "").replace(/\D/g, ""); if(d.length === 10) d = "91" + d; return "tel:+" + (d.length >= 11 ? d : SHOP.whatsapp); }
 async function init(){
   try{
     const r = await fetch("store.json", {cache: "no-store"});
@@ -1412,13 +1414,13 @@ async function init(){
   $("#tagline").textContent = SHOP.tagline || "";
 
   $("#badges").innerHTML = (SHOP.badges || []).map(b => `<span>${esc(b)}</span>`).join("");
-  $("#phoneLink").textContent = SHOP.phoneDisplay; $("#phoneLink").href = "tel:+" + SHOP.whatsapp;
+  $("#phoneLink").textContent = SHOP.phoneDisplay; $("#phoneLink").href = telHref();
   $("#b2bPhone").textContent = SHOP.phoneDisplay;
   $("#mWa").href = `https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent("Namaste " + SHOP.name + ", I have a question about your products.")}`;
   $("#emailText").textContent = SHOP.email || "";
   document.querySelectorAll("[data-wa-link]").forEach(a => a.href = `https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent("Namaste " + SHOP.name + ", I want bulk price for spices.")}`);
   $("#brandFoot").textContent = SHOP.name;
-  $("#ftContact").innerHTML = [SHOP.phoneDisplay ? `<a href="tel:+${esc(SHOP.whatsapp)}" style="color:inherit">${esc(SHOP.phoneDisplay)}</a>` : "", esc(SHOP.email || "")].filter(Boolean).join(" · ");
+  $("#ftContact").innerHTML = [SHOP.phoneDisplay ? `<a href="${telHref()}" style="color:inherit">${esc(SHOP.phoneDisplay)}</a>` : "", esc(SHOP.email || "")].filter(Boolean).join(" · ");
   setupBg(); render(); renderPages(); route();
 }
 $("#yr").textContent = new Date().getFullYear();

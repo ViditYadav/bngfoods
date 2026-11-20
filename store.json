@@ -13,10 +13,10 @@
     "minOrder": 0,
     "whatsappApiKey": "",
     "orderEmailKey": "",
-    "sheetProductsCsv": "",
-    "sheetSettingsCsv": "",
-    "sheetGalleryCsv": "",
-    "sheetCareersCsv": "",
+    "sheetProductsCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTP-1b2obPiNrPmbbna6-dcLTmGezD35iY8tW30jXXGI3RajFN8kY3RXwCFvjSnyB5CjW7KpOiy1xa_/pub?gid=1104685999&single=true&output=csv",
+    "sheetSettingsCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTP-1b2obPiNrPmbbna6-dcLTmGezD35iY8tW30jXXGI3RajFN8kY3RXwCFvjSnyB5CjW7KpOiy1xa_/pub?gid=1892210772&single=true&output=csv",
+    "sheetGalleryCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTP-1b2obPiNrPmbbna6-dcLTmGezD35iY8tW30jXXGI3RajFN8kY3RXwCFvjSnyB5CjW7KpOiy1xa_/pub?gid=1627762715&single=true&output=csv",
+    "sheetCareersCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTP-1b2obPiNrPmbbna6-dcLTmGezD35iY8tW30jXXGI3RajFN8kY3RXwCFvjSnyB5CjW7KpOiy1xa_/pub?gid=1060149821&single=true&output=csv",
     "instagram": "",
     "youtube": "",
     "facebook": "",
@@ -52,7 +52,7 @@
   "products": [
     {"id": "turmeric-powder", "keywords": ["haldi", "haldi powder", "haladi", "हल्दी", "हलदी", "पिसी हल्दी", "turmeric", "powder", "पाउडर"], "cat": "Spice Powders", "name": "Turmeric Powder", "hindi": "हल्दी पाउडर",
      "desc": "Pure turmeric, finely ground. No added colour.", "color": "#f0a020",
-     "packs": [["100 g", 40, "images/turmeric-100.jpg"], ["200 g", 75, "images/turmeric-200.jpg"], ["500 g", 180, "images/turmeric-500.jpg"]]},
+     "packs": [["100 g", 60, "images/turmeric-100.jpg"], ["200 g", 75, "images/turmeric-200.jpg"], ["500 g", 180, "images/turmeric-500.jpg"]]},
 
     {"id": "chilli-powder", "keywords": ["lal mirch", "lal mirchi", "mirch", "mirchi", "chilli", "chili", "red chilli", "लाल मिर्च", "लाल मिर्ची", "मिर्च", "मिर्ची", "powder", "पाउडर"], "cat": "Spice Powders", "name": "Red Chilli Powder", "hindi": "लाल मिर्ची पाउडर",
      "desc": "Bright colour with balanced heat. No added colour.", "color": "#d6252b",
