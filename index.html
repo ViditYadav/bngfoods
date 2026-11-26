@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#4a0d0d">
-<title>BNG Foods – Order Online</title>
-<meta name="description" content="BNG Foods – स्वाद की पहचान. Order pure turmeric, red chilli and coriander powder and whole spices online. Retail packs and bulk / wholesale supply direct from the manufacturer.">
+<title>BNG Foods – Spices Manufacturer in Ujjain, MP | Haldi, Mirch, Dhaniya Powder &amp; Bulk Spices</title>
+<meta name="description" content="BNG Foods – स्वाद की पहचान. Spice manufacturer in Badnagar, Ujjain (MP): turmeric, red chilli and coriander powder and whole spices. Retail packs and factory-direct bulk supply (5–50 kg). Order online or on WhatsApp.">
+<link rel="canonical" href="https://bngfoods.in/">
 <!-- Link previews on WhatsApp / Instagram / Facebook. If your domain is not bngfoods.in, change the two https:// links below. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BNG Foods">
@@ -25,8 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;600;700;800&family=Hind:wght@400;600&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"BNG Foods","url":"https://bngfoods.in/","logo":"https://bngfoods.in/images/logo.png","slogan":"The Real Taste of Bharat","email":"Contact.bngfoods@gmail.com",
- "contactPoint":{"@type":"ContactPoint","telephone":"+91-78050-03225","contactType":"sales","areaServed":"IN","availableLanguage":["Hindi","English"]}}
+{"@context": "https://schema.org", "@type": "LocalBusiness", "@id": "https://bngfoods.in/#business", "name": "BNG Foods", "description": "Spice manufacturer in Badnagar, Ujjain (Madhya Pradesh). Turmeric, red chilli and coriander powder and whole spices, in retail packs and bulk.", "url": "https://bngfoods.in/", "logo": "https://bngfoods.in/images/logo.png", "image": "https://bngfoods.in/images/og-image.jpg", "slogan": "The Real Taste of Bharat", "telephone": "+917805003225", "email": "Contact.bngfoods@gmail.com", "address": {"@type": "PostalAddress", "streetAddress": "Survey No. 2375/5/1/1 & 2375/5/1/2, Barnagar Kasba, Near Bio Fuel", "addressLocality": "Badnagar", "addressRegion": "Madhya Pradesh", "postalCode": "456771", "addressCountry": "IN"}, "areaServed": "IN", "hasMap": "https://maps.app.goo.gl/48Xu2NZN53Yn5ofK6"}
 </script>
 <style>
   /* =====================================================================
@@ -692,6 +692,17 @@
   .bnav a[aria-current="page"]::before{background:var(--gold);top:2px}
   .bnav .bnav-wa span.bub{border-color:#4a0d0d}
   .bnav .bnav-wa em{color:#9be3a6}
+
+  /* footer: address + product links (also helps Google) */
+  .ft-addr{font-size:12.5px;color:#d9bfa0}
+  .ft-seo{display:flex;flex-wrap:wrap;gap:2px 14px;font-size:13px}
+  .ft-seo a,.ft-seo span a{display:inline-block;padding:4px 0;color:#f1dccb;font-weight:600}
+  .ft-seo span{display:contents}
+  .b2b-more{display:inline-block;margin-top:10px;color:var(--gold-l);font-weight:700;text-decoration:none;font-size:14px}
+  .b2b-more:hover{text-decoration:underline}
+  @media (min-width:921px){ .ft-addr,.ft-seo{grid-column:1/-1;justify-content:center;text-align:center} }
+
+  .ft-addr a{color:#d9bfa0;font-weight:500}.ft-addr a b{color:var(--gold-l)}
 </style>
 </head>
 <body class="bg-village">
@@ -786,6 +797,7 @@
           <p class="hi" lang="hi">हम अपने मसाले खुद तैयार और पैक करते हैं, इसलिए आपको सीधे फैक्ट्री से थोक भाव में माल मिलता है। दुकानदार, होलसेलर, डिस्ट्रीब्यूटर, होटल-रेस्टोरेंट, कैटरर्स और फ़ूड बिज़नेस के लिए।</p>
           <button class="btn btn-gold" data-bulk><i data-ico="sack"></i><span data-t="bulk_quote">Get Bulk Price Quote</span></button>
           <div class="b2b-alt"><span data-t="or_call">Or call / WhatsApp</span> <b id="b2bPhone"></b></div>
+          <a class="b2b-more" href="bulk-spices/" data-t="bulk_more">Bulk price list &amp; details →</a>
         </div>
         <ul class="b2b-points">
           <li><b>Factory-direct pricing</b><span>No middlemen. Better margins for resellers.</span></li>
@@ -883,6 +895,8 @@
     <div class="ft-brand"><span id="ftLogo"></span><p id="ftIntro" lang="hi">स्वाद की पहचान · The Real Taste of Bharat</p></div>
     <nav class="ft-links" aria-label="Footer"><a href="#home" data-t="nav_shop">Shop</a><a href="#gallery" data-t="nav_gallery">Behind the Masala</a><a href="#certificates" data-t="nav_certs">Certificates</a><a href="#careers" data-t="nav_careers">Careers</a></nav>
     <div class="ft-contact" id="ftContact"></div>
+    <div class="ft-addr" id="ftAddr">Badnagar, Ujjain District, Madhya Pradesh 456771</div>
+    <nav class="ft-seo" aria-label="Products"><a href="products/">All products</a><a href="bulk-spices/">Bulk spices supplier</a><span id="ftCats"></span></nav>
     <div class="ft-lic" id="ftLic"></div>
     <div class="ft-bottom">
       <span>&copy; <span id="yr"></span> <span id="brandFoot"></span></span>
@@ -1392,6 +1406,7 @@ $("#search").addEventListener("input", e => { query = e.target.value; renderCata
 
 /* ---------- Pages: #gallery, #certificates, #careers (shop is the default) ---------- */
 const VIEWS = ["shop", "gallery", "certificates", "careers"];
+const HOME_TITLE = document.title;
 const TITLES = {shop: "Order Online", gallery: "Behind the Masala", certificates: "Licences & Certificates", careers: "Careers"};
 let view = null;
 function route(){
@@ -1404,7 +1419,7 @@ function route(){
   route._ready = true;
   document.querySelectorAll("[data-nav]").forEach(a => a.dataset.nav === v ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   if(changed){ if(sheetView && sheetView !== "done") closeSheet(); closeLightbox(); window.scrollTo(0, 0); }
-  document.title = `${SHOP.name || "BNG Foods"} – ${TITLES[v]}`;
+  document.title = v === "shop" ? HOME_TITLE : `${TITLES[v]} – ${SHOP.name || "BNG Foods"}`;   // keep the search-friendly title on the home page
 }
 window.addEventListener("hashchange", route);
 
@@ -1785,7 +1800,7 @@ const DICT = {
     ft_explore:"Explore", ft_contact:"Contact", install:"Install app", chat_tip:"Chat with us", view_cart:"View cart & order",
     add:"Add", your_order:"Your order", cart_empty:"Your cart is empty. Choose a pack size and add products to start.", order_again:"Order again",
     checkout:"Checkout", clear_cart:"Clear cart", item:"item", items:"items", reorder_t:"Order your usual again?", reorder_done:"Your last order is in the cart",
-    see_product:"Shop"},
+    see_product:"Shop", bulk_more:"Bulk price list & details →"},
   hi: {nav_shop:"खरीदें", nav_gallery:"मसाला कैसे बनता है", nav_factory:"फैक्ट्री", nav_certs:"प्रमाण पत्र", nav_certs_s:"लाइसेंस", nav_careers:"नौकरी",
     bulk_enquiry:"थोक पूछताछ", hero_eyebrow:"सीधे हमारी फैक्ट्री से", shop_now:"अभी खरीदें", bulk_order:"थोक ऑर्डर",
     hero_intro:"प्रीमियम मसाले, हमारी अपनी यूनिट में तैयार और पैक। रिटेल पैक या थोक में सीधे फैक्ट्री से मंगाएँ।",
@@ -1795,7 +1810,7 @@ const DICT = {
     ft_explore:"देखें", ft_contact:"संपर्क", install:"ऐप इंस्टॉल करें", chat_tip:"हमसे बात करें", view_cart:"कार्ट देखें और ऑर्डर करें",
     add:"जोड़ें", your_order:"आपका ऑर्डर", cart_empty:"आपका कार्ट खाली है। पैक साइज़ चुनें और प्रोडक्ट जोड़ें।", order_again:"फिर से ऑर्डर करें",
     checkout:"ऑर्डर करें", clear_cart:"कार्ट खाली करें", item:"आइटम", items:"आइटम", reorder_t:"पिछला ऑर्डर फिर से मंगाएँ?", reorder_done:"आपका पिछला ऑर्डर कार्ट में है",
-    see_product:"देखें"}
+    see_product:"देखें", bulk_more:"थोक रेट लिस्ट और जानकारी →"}
 };
 let LANG = (() => { try{ const s = localStorage.getItem("bng_lang"); if(s) return s; }catch{} return /^hi/i.test(navigator.language || "") ? "hi" : "en"; })();
 function T(k){
@@ -1949,8 +1964,29 @@ document.addEventListener("click", e => {
   });
 });
 
+/* Links like bngfoods.in/#p-turmeric-powder open the shop at that product (used by the product pages) */
+const pslug = t => norm(t).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+function openProductFromHash(){
+  const m = decodeURIComponent(location.hash).match(/^#p-(.+)$/); if(!m || !PRODUCTS.length) return;
+  const p = PRODUCTS.find(x => x.id === m[1] || pslug(x.name) === m[1]); if(!p) return;
+  if(activeCat !== "All" || query){ activeCat = "All"; query = ""; $("#search").value = ""; render(); }
+  setTimeout(() => {
+    const card = document.querySelector(`#catalog .item[data-pid="${CSS.escape(p.id)}"]`); if(!card) return;
+    const off = ($(".hdr")?.offsetHeight || 0) + ($(".tabs")?.offsetHeight || 0) + 12;
+    scrollTo({top: card.getBoundingClientRect().top + scrollY - off, behavior: "instant"});
+    card.animate([{boxShadow: "0 0 0 0 rgba(232,179,44,.9)"}, {boxShadow: "0 0 0 12px rgba(232,179,44,0)"}], {duration: 900, iterations: 2, delay: 300});
+  }, 60);
+}
+addEventListener("hashchange", openProductFromHash);
+function renderFooterExtras(){
+  const a = SHOP.address || {};
+  const line = [a.street, a.town, a.district ? a.district + " District" : "", a.state, a.pincode].filter(Boolean).join(", ");
+  if(line) $("#ftAddr").innerHTML = a.mapsUrl ? `<a href="${esc(a.mapsUrl)}" target="_blank" rel="noopener">📍 ${esc(line)} · <b>Get directions</b></a>` : esc(line);
+  $("#ftCats").innerHTML = cats.filter(c => c !== "All").map(c => `<a href="products/${pslug(c)}/">${esc(c)}</a>`).join("");
+}
+
 function afterInit(){
-  applyLang(); renderRecipes(); renderReviews(); observeReveal();
+  applyLang(); renderRecipes(); renderReviews(); observeReveal(); renderFooterExtras(); openProductFromHash();
 }
 applyLang();
 observeReveal();

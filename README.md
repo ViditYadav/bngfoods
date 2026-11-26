@@ -166,3 +166,25 @@ Works on any static host: GitHub Pages, Netlify, Cloudflare Pages, or any web ho
 
 Images were re-compressed with the **same file names**, so the Google Sheet's Image column keeps working.
 After you change files on GitHub, phones that installed the app pick up the new version on their next visit.
+
+---
+
+## Google (SEO) pages – built automatically
+
+Besides the shop page, the website has separate pages that Google can list in search results:
+
+| Page | Address | What it's for |
+|---|---|---|
+| All products | `bngfoods.in/products/` | Every live product, by category |
+| Category | `bngfoods.in/products/spice-powders/` etc. | Searches like "spice powders manufacturer Ujjain" |
+| Product | `bngfoods.in/products/turmeric-powder/` etc. | One page per live product: Hindi name, pack sizes, prices, WhatsApp order |
+| Bulk | `bngfoods.in/bulk-spices/` | Searches like "bulk spices supplier MP": bulk price list, FAQs |
+| `sitemap.xml`, `robots.txt` | | Tell Google which pages exist |
+
+**You don't edit these pages.** They are built from your Google Sheet by `tools/build_pages.py`,
+which GitHub runs automatically every 6 hours (`.github/workflows/build-pages.yml`).
+When you switch a product on (Show = Yes + price), its page appears at the next run; switch it off and the page is removed.
+To update straight away: GitHub → **Actions** → **Build product pages** → **Run workflow**.
+
+Business address and website address used on these pages: `store.json` → `shop.address` and `shop.siteUrl`.
+Add your Google Maps link in `shop.address.mapsUrl` once your Google Business Profile is set up.
