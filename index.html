@@ -663,6 +663,11 @@
   @media (min-width:600px){ .ph b{font-size:24px} .ph .ico{width:36px;height:36px} }
   .tab small{font-size:11.5px;font-weight:700;opacity:.6;margin-left:1px}
   .tab[aria-pressed="true"] small{opacity:.85;color:var(--gold-l)}
+  /* Hindi vowel signs (like the ी in "की") rise above the text line: give them room so they are never clipped */
+  .hero h1{line-height:1.3;padding:.14em .06em .04em;margin-top:6px}
+  .brand-t{line-height:1.2}
+  .brand-t span{line-height:1.55;padding-top:2px;overflow:visible;text-overflow:clip}
+  .ty-card h1,.ph b,.ty-bar span{line-height:1.4}
 </style>
 </head>
 <body class="bg-village">
