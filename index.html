@@ -1527,6 +1527,9 @@ function parseCSV(text){
     else cell += ch;
   }
   if(cell !== "" || row.length){ row.push(cell); rows.push(row); }
+  // a broken cell in Google Sheets (#ERROR!, #NAME?, #VALUE!, #REF!, #N/A…) must never reach the website: treat it as empty
+  const SHEET_ERR = /^#(ERROR!|NAME\?|VALUE!|REF!|N\/A|DIV\/0!|NUM!|NULL!)/i;
+  rows.forEach(r => r.forEach((c, i) => { if(SHEET_ERR.test(String(c).trim())) r[i] = ""; }));
   return rows.filter(r => r.some(c => String(c).trim() !== ""));
 }
 const yes = v => /^(y|yes|true|1|haan|हाँ|हां)$/i.test(String(v || "").trim());
