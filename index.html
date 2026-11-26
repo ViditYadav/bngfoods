@@ -668,6 +668,30 @@
   .brand-t{line-height:1.2}
   .brand-t span{line-height:1.55;padding-top:2px;overflow:visible;text-overflow:clip}
   .ty-card h1,.ph b,.ty-bar span{line-height:1.4}
+  /* ===== Laptop / desktop: same bottom menu as phones ===== */
+  @media (min-width:921px){
+    :root{--bnav:calc(64px + env(safe-area-inset-bottom))}
+    .bnav{display:grid;grid-template-columns:repeat(5,minmax(0,118px));justify-content:center;column-gap:10px}
+    .bnav a{font-size:12px}
+    .bnav a .ico{width:24px;height:24px}
+    .bnav .bnav-wa span.bub{width:56px;height:56px;margin-top:-24px}
+    .topnav{display:none}                       /* links now live in the bottom menu */
+    .brand{flex:1}
+    .fab{display:none}                          /* WhatsApp is in the bottom menu */
+    body,body.has-bar{padding-bottom:var(--bnav)}
+    .toast{bottom:calc(var(--bnav) + 18px)}
+    aside.cart{max-height:calc(100vh - var(--hdr) - var(--bnav) - 100px)}
+  }
+  /* ===== Bottom menu in the header's deep red ===== */
+  .bnav{background:linear-gradient(180deg,#5a1111,#3d0a0a);-webkit-backdrop-filter:none;backdrop-filter:none;border-top:0;box-shadow:0 -8px 24px rgba(30,6,6,.28)}
+  .bnav::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold) 80%,transparent);opacity:.8}
+  .bnav a{color:#e6cdb0}
+  .bnav a:hover{color:#fff}
+  .bnav a[aria-current="page"]{color:#fff}
+  .bnav a[aria-current="page"] .ico{color:var(--gold)}
+  .bnav a[aria-current="page"]::before{background:var(--gold);top:2px}
+  .bnav .bnav-wa span.bub{border-color:#4a0d0d}
+  .bnav .bnav-wa em{color:#9be3a6}
 </style>
 </head>
 <body class="bg-village">
