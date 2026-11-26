@@ -68,16 +68,25 @@
      "desc": "Aromatic coriander, finely ground. No preservatives.", "color": "#2f6b34",
      "packs": [["100 g", 30, "images/coriander-100.jpg"], ["200 g", 55, "images/coriander-200.jpg"], ["500 g", 130, "images/coriander-500.jpg"]]},
 
-    {"id": "turmeric-whole", "image": "images/whole-turmeric.jpg", "imageFit": "cover", "keywords": ["sabut haldi", "khadi haldi", "haldi gaanth", "haldi", "साबुत हल्दी", "खड़ी हल्दी", "हल्दी गांठ", "हल्दी", "whole", "sabut", "साबुत"], "cat": "Whole Spices", "name": "Whole Turmeric", "hindi": "साबुत हल्दी",
-     "desc": "Dried turmeric fingers, cleaned and sorted.", "color": "#c98a1a",
-     "packs": [["500 g", 150], ["1 kg", 290], ["5 kg", 1400], ["10 kg", 2800], ["30 kg", 8400], ["50 kg", 13000]]},
-
     {"id": "chilli-whole", "image": "images/whole-chilli.jpg", "imageFit": "cover", "keywords": ["sabut mirch", "sukhi mirch", "sukhi lal mirch", "khadi mirch", "mirch", "mirchi", "chilli", "chili", "साबुत मिर्च", "सूखी लाल मिर्च", "खड़ी मिर्च", "मिर्च", "मिर्ची", "लाल मिर्च", "whole", "sabut", "साबुत"], "cat": "Whole Spices", "name": "Whole Red Chilli", "hindi": "साबुत लाल मिर्च",
      "desc": "Sun-dried whole red chillies.", "color": "#a52a1e",
      "packs": [["500 g", 200], ["1 kg", 390], ["5 kg", 1900], ["10 kg", 3800], ["30 kg", 11400], ["50 kg", 18000]]},
 
     {"id": "coriander-whole", "image": "images/whole-coriander.jpg", "imageFit": "cover", "keywords": ["sabut dhaniya", "dhaniya beej", "dhaniya", "dhania", "seeds", "साबुत धनिया", "धनिया बीज", "धनिया", "whole", "sabut", "साबुत"], "cat": "Whole Spices", "name": "Coriander Seeds", "hindi": "साबुत धनिया",
      "desc": "Whole coriander seeds, machine-cleaned.", "color": "#8b7d3a",
-     "packs": [["500 g", 100], ["1 kg", 190], ["5 kg", 900], ["10 kg", 1800], ["30 kg", 5400], ["50 kg", 8500]]}
-  ]
+     "packs": [["500 g", 100], ["1 kg", 190], ["5 kg", 900], ["10 kg", 1800], ["30 kg", 5400], ["50 kg", 8500]]},
+
+    {"id": "turmeric-whole", "image": "images/whole-turmeric.jpg", "imageFit": "cover", "keywords": ["sabut haldi", "khadi haldi", "haldi gaanth", "haldi", "साबुत हल्दी", "खड़ी हल्दी", "हल्दी गांठ", "हल्दी", "whole", "sabut", "साबुत"], "cat": "Whole Spices", "name": "Whole Turmeric", "hindi": "साबुत हल्दी",
+     "desc": "Dried turmeric fingers, cleaned and sorted.", "color": "#c98a1a",
+     "packs": [["500 g", 150], ["1 kg", 290], ["5 kg", 1400], ["10 kg", 2800], ["30 kg", 8400], ["50 kg", 13000]]}
+  ],
+  "recipes": [
+    {"title": "Haldi Doodh (Turmeric Milk)", "hindi": "हल्दी दूध", "time": "5 min", "icon": "bowl", "product": "turmeric-powder",
+     "steps": ["Warm 1 cup of milk.", "Add ½ tsp turmeric powder and a pinch of black pepper.", "Simmer for 2 minutes, sweeten with jaggery or honey."]},
+    {"title": "Masala Aloo", "hindi": "मसाला आलू", "time": "15 min", "icon": "chilli", "product": "chilli-powder",
+     "steps": ["Boil and cube 3 potatoes.", "Heat 2 tbsp oil, add cumin, then 1 tsp red chilli, ½ tsp turmeric, 1 tsp coriander powder and salt.", "Toss the potatoes for 5 minutes and finish with fresh coriander."]},
+    {"title": "Dal Tadka", "hindi": "दाल तड़का", "time": "25 min", "icon": "leaf", "product": "coriander-powder",
+     "steps": ["Pressure-cook 1 cup toor dal with ½ tsp turmeric and salt.", "Heat ghee, add cumin and garlic, then 1 tsp coriander powder and ½ tsp red chilli.", "Pour the tadka over the dal and serve hot."]}
+  ],
+  "reviews": []
 }

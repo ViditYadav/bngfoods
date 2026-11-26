@@ -146,3 +146,23 @@ then open http://localhost:8000
 ## Hosting
 
 Works on any static host: GitHub Pages, Netlify, Cloudflare Pages, or any web hosting.
+
+---
+
+## Version 2 – what's new (mobile-first redesign)
+
+| Feature | Where to change it |
+|---|---|
+| **Hero section** with your packs, big Hindi tagline and quick stats (products, licences, bulk pack size, vegetarian) | Stats are worked out automatically. To set your own, add `"stats"` inside `"shop"` in `store.json`, e.g. `"stats": [{"value": 10, "suffix": "+", "label": "Years", "hindi": "साल"}]` |
+| **Moving badge strip** | Uses the same badges as before (`shop.badges` / Google Sheet) |
+| **Bottom menu on phones** with WhatsApp in the middle | Automatic |
+| **Cart bar** at the bottom of the screen + cart icon with a count in the header | Automatic |
+| **English / हिंदी switch** (EN/हिं button in the header) | Automatic; remembers the customer's choice |
+| **"Order again"** – a returning customer can repeat their last order in one tap | Automatic (remembered on their phone) |
+| **Recipes** | `"recipes"` list at the end of `store.json`. `"product"` is the product id it links to. Delete the list to hide the section |
+| **Customer reviews** | Hidden until you add them to `"reviews"` in `store.json`. Use only real reviews, with the customer's permission:<br>`"reviews": [{"name": "Ramesh Kirana Store", "place": "Patna", "stars": 5, "text": "Good colour and taste, customers ask for it again.", "source": "WhatsApp"}]` |
+| **Install as an app** ("Install app" button in the footer on Android / Chrome) | `manifest.webmanifest`, `sw.js`, icons in `images/` |
+| **Link preview** on WhatsApp / Instagram / Facebook | `images/og-image.jpg`. The page assumes the address **https://bngfoods.in** – if your domain is different, change the `og:url`, `og:image` and JSON-LD links near the top of `index.html` |
+
+Images were re-compressed with the **same file names**, so the Google Sheet's Image column keeps working.
+After you change files on GitHub, phones that installed the app pick up the new version on their next visit.
