@@ -188,3 +188,26 @@ To update straight away: GitHub → **Actions** → **Build product pages** → 
 
 Business address and website address used on these pages: `store.json` → `shop.address` and `shop.siteUrl`.
 Add your Google Maps link in `shop.address.mapsUrl` once your Google Business Profile is set up.
+
+---
+
+## Brochure (उत्पाद सूची / Product Catalogue) – `bngfoods.in/brochure/`
+
+Hindi + English catalogue for the sales team and the website. **No prices are shown.**
+It reads the same Google Sheet as the shop, so there is nothing extra to update.
+
+| Sheet column (Products tab, far right) | What it does |
+|---|---|
+| `Brochure (Yes/No)` | Yes = product is in the brochure. Does not affect the website. |
+| `Brochure Hindi Text` | Hindi story: where it comes from, how it is cleaned and ground |
+| `Brochure English Text` | Same in English. Blank = uses Description |
+| `Brochure Image` | Optional sharper photo for the brochure only (e.g. `brochure/turmeric-powder.jpg` in `images/brochure/`). Blank = uses Image |
+
+- Pack sizes shown = rows with Show on Website = Yes (if none, all pack sizes listed).
+- Photo = the Image of the first live pack. Special = Yes adds the gold "Special" label.
+- Contact details, badges and FSSAI/GST/Udyam numbers come from the Settings tab / `store.json`.
+- Cover photo and contact-page banner: Settings tab → **Brochure Cover Image** / **Brochure Banner Image** (file names in `images/`), backup `shop.brochureCover` / `shop.brochureBanner` in `store.json`. To change the photo, upload a new file and type its name there.
+- Extra phone numbers for the brochure only: Settings tab → **Brochure Phone Numbers** (comma-separated), backup `shop.brochurePhones` in `store.json`. They are not shown on the website.
+- **Download Brochure** button → choose **Save as PDF** to get an A4 file to send on WhatsApp or print. The shop page links here with a "Download Brochure" button under the main heading and in the footer.
+- Up to 3 products per A4 page; each category starts on a new page.
+- Do not start any new column name with Category, Product, Hindi, Description, Pack, Price, Image, Full Photo, Special, Search or Show – the website reads columns by these words.

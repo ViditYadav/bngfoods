@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4a0d0d">
+<title>BNG Foods – Download Brochure | उत्पाद सूची</title>
+<meta name="description" content="BNG Foods product catalogue in Hindi and English – spice powders and whole spices from Badnagar, Ujjain (MP).">
+<link rel="canonical" href="https://bngfoods.in/brochure/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BNG Foods – उत्पाद सूची | Product Catalogue">
+<meta property="og:description" content="हमारे मसाले – खेत से चुने, साफ़ किए और धीमी पिसाई। Spice powders and whole spices from BNG Foods.">
+<meta property="og:url" content="https://bngfoods.in/brochure/">
+<meta property="og:image" content="https://bngfoods.in/images/og-image.jpg">
+<link rel="icon" type="image/png" sizes="48x48" href="../images/favicon-48.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;600;700;800&family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Same colours as the shop page */
+  :root{
+    --bg:#fbf7f0; --card:#fff; --ink:#2a1a12; --muted:#6f5f4e; --line:#ece2d3;
+    --brand:#c8202a; --maroon:#7d1616; --maroon-d:#4a0d0d; --gold:#e8b32c; --gold-l:#ffd45c; --ok:#15803d;
+    --hi:"Hind", "Noto Sans Devanagari", sans-serif; --en:"Inter", system-ui, sans-serif; --disp:"Fraunces", Georgia, serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:#e9e1d4; color:var(--ink); font-family:var(--en); -webkit-font-smoothing:antialiased}
+  [lang="hi"], .hi{font-family:var(--hi)}
+  img{max-width:100%; display:block}
+
+  /* ---------- Toolbar (screen only) ---------- */
+  .bar{position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center;
+       padding:10px 12px; background:var(--maroon-d); color:#fff}
+  .bar a, .bar button{font:600 14px/1 var(--en); color:#fff; text-decoration:none; border:1px solid rgba(255,255,255,.35);
+       background:transparent; border-radius:999px; padding:11px 16px; min-height:44px; display:inline-flex; align-items:center; gap:6px; cursor:pointer}
+  .bar .primary{background:var(--gold); color:var(--maroon-d); border-color:var(--gold)}
+  .bar .wa{background:#1f8f4e; border-color:#1f8f4e}
+  .bar a:hover, .bar button:hover{filter:brightness(1.08)}
+  .status{text-align:center; padding:40px 16px; color:var(--muted)}
+
+  /* ---------- Pages ---------- */
+  .pages{padding:20px 12px 60px; display:flex; flex-direction:column; align-items:center; gap:20px}
+  .page{width:100%; max-width:210mm; background:var(--bg); border-radius:6px; overflow:hidden; box-shadow:0 2px 6px rgba(43,29,18,.08),0 18px 40px rgba(43,29,18,.12);
+        display:flex; flex-direction:column; position:relative}
+  .band{height:10px; background:var(--maroon); border-bottom:3px solid var(--gold); flex:none}
+  .foot{margin-top:auto; background:var(--maroon-d); color:#fff; border-top:3px solid var(--gold); padding:10px 18px;
+        display:flex; justify-content:space-between; align-items:center; gap:10px; font-size:12px}
+  .foot b{font-family:var(--disp); font-style:italic; font-weight:600; font-size:14px}
+
+  /* Cover */
+  .cover-top{display:flex; flex-direction:column; align-items:center; text-align:center; padding:28px 24px 8px; gap:6px}
+  .cover-top .logo{width:150px}
+  .tag-hi{font:700 24px/1.2 var(--hi); color:var(--maroon)}
+  .tag-en{font:600 italic 17px/1.2 var(--disp); color:var(--ink)}
+  .title-box{margin:16px 24px 0; background:var(--maroon); color:#fff; border:2px solid var(--gold); border-radius:14px; padding:16px; text-align:center}
+  .title-box .hi{font:700 34px/1.15 var(--hi); color:var(--gold-l)}
+  .title-box .en{font:800 15px/1.3 var(--en); letter-spacing:.18em; text-transform:uppercase; margin-top:4px}
+  .hero{margin:18px 24px 0; border-radius:14px; overflow:hidden; background:#f3e9d8}
+  .hero img{width:100%; height:auto; aspect-ratio:240/100; object-fit:cover}
+  .banner{margin:4px 24px 0; border-radius:14px; overflow:hidden}
+  .banner img{width:100%; height:auto; aspect-ratio:611/221; object-fit:cover}
+  .section-h{display:flex; align-items:center; gap:10px; margin:20px 24px 10px}
+  .section-h::before, .section-h::after{content:""; flex:1; height:1px; background:var(--ink); opacity:.35}
+  .section-h span{font:600 13px/1.3 var(--en); letter-spacing:.12em; text-transform:uppercase; text-align:center}
+  .section-h span .hi{display:block; font:700 16px/1.3 var(--hi); letter-spacing:0; text-transform:none; color:var(--maroon)}
+  .steps{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:0 24px}
+  .step{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 10px; text-align:center}
+  .step .n{width:30px; height:30px; margin:0 auto 6px; border-radius:50%; background:var(--gold); color:var(--maroon-d); font:800 14px/30px var(--en)}
+  .step .hi{font:700 15px/1.3 var(--hi); color:var(--maroon)}
+  .step .en{font:500 12px/1.35 var(--en); color:var(--muted); margin-top:2px}
+  .badges{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:16px 24px 22px}
+  .badge{display:flex; align-items:center; gap:6px; background:#fff; border:1.5px solid var(--gold); border-radius:999px; padding:6px 12px 6px 8px}
+  .badge svg{flex:none; color:var(--ok)}
+  .badge .hi{font:600 13px/1.2 var(--hi)}
+  .badge .en{font:500 11px/1.2 var(--en); color:var(--muted)}
+
+  /* Product pages */
+  .ph{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 24px 6px}
+  .ph img{width:54px}
+  .ph .t{text-align:right}
+  .ph .t .hi{font:700 16px/1.2 var(--hi); color:var(--maroon)}
+  .ph .t .en{font:600 11px/1.3 var(--en); letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+  .cat{margin:12px 24px 4px; display:flex; align-items:baseline; gap:10px; border-bottom:2px solid var(--maroon); padding-bottom:6px}
+  .cat .hi{font:700 22px/1.2 var(--hi); color:var(--maroon)}
+  .cat .en{font:700 13px/1.2 var(--en); letter-spacing:.1em; text-transform:uppercase}
+  .prods{display:flex; flex-direction:column; gap:14px; padding:10px 24px 20px}
+  .prod{display:flex; flex-wrap:wrap; gap:16px; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:14px; break-inside:avoid}
+  .pimg{flex:0 0 190px; max-width:100%; aspect-ratio:1/1; border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center; position:relative}
+  .pimg img{width:100%; height:100%; object-fit:contain; padding:8px}
+  .pimg.cover img{object-fit:cover; padding:0}
+  .pimg .noimg{font:700 26px/1.2 var(--hi); color:#fff; text-align:center; padding:12px}
+  .special{position:absolute; top:8px; left:8px; background:var(--gold); color:var(--maroon-d); font:800 10px/1 var(--en); letter-spacing:.08em; text-transform:uppercase; padding:5px 8px; border-radius:999px}
+  .pbody{flex:1 1 260px; min-width:0; display:flex; flex-direction:column; gap:6px}
+  .pname-hi{font:700 26px/1.15 var(--hi); color:var(--maroon); margin:0}
+  .pname-en{font:700 15px/1.25 var(--en); margin:0; letter-spacing:.02em}
+  .ptext-hi{font:500 15px/1.6 var(--hi); margin:4px 0 0}
+  .ptext-en{font:400 13px/1.55 var(--en); color:var(--muted); margin:0}
+  .packs{margin-top:auto; padding-top:6px; display:flex; flex-wrap:wrap; align-items:center; gap:6px}
+  .packs .lbl{font:600 12px/1.2 var(--hi); color:var(--muted); margin-right:2px}
+  .packs .lbl span{font-family:var(--en)}
+  .chip{font:700 13px/1 var(--en); border:1.5px solid var(--maroon); color:var(--maroon); border-radius:999px; padding:6px 10px; background:#fff}
+
+  /* Contact page */
+  .contact{padding:10px 24px 24px; display:flex; flex-direction:column; gap:14px}
+  @media print{ .contact{flex:1; justify-content:center; gap:7mm} .cta .hi{font-size:30px} .row .v{font-size:17px} }
+  .cta{background:var(--maroon); color:#fff; border:2px solid var(--gold); border-radius:16px; padding:18px; text-align:center}
+  .cta .hi{font:700 24px/1.3 var(--hi); color:var(--gold-l)}
+  .cta .en{font:600 14px/1.4 var(--en); margin-top:4px}
+  .rows{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
+  .row{background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 14px; min-width:0}
+  .row .k{font:600 12px/1.3 var(--hi); color:var(--muted)}
+  .row .k span{font-family:var(--en)}
+  .row .v{font:700 15px/1.4 var(--en); overflow-wrap:anywhere; margin-top:2px}
+  .row .v a{color:var(--maroon); text-decoration:none}
+  .row.wide{grid-column:1 / -1}
+  .row .v.nums{display:flex; flex-wrap:wrap; gap:4px 22px}
+  .regs{display:flex; flex-wrap:wrap; gap:8px}
+  .reg{background:#fff; border:1px dashed var(--maroon); border-radius:10px; padding:8px 12px; font:600 12px/1.35 var(--en)}
+  .reg b{display:block; font-size:14px}
+
+  @media (max-width:560px){
+    .steps{grid-template-columns:1fr}
+    .rows{grid-template-columns:1fr}
+    .pimg{flex-basis:100%; aspect-ratio:4/3}
+    .title-box .hi{font-size:28px}
+  }
+
+  /* ---------- Print / Save as PDF: one A4 sheet per page ---------- */
+  @page{size:A4; margin:0}
+  @media print{
+    body{background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+    .bar, .status{display:none !important}
+    .pages{padding:0; gap:0; display:block}
+    .page{width:210mm; height:297mm; max-width:none; border-radius:0; box-shadow:none; break-after:page; page-break-after:always; overflow:hidden}
+    .page:last-child{break-after:auto; page-break-after:auto}
+    .pimg{flex:0 0 52mm; aspect-ratio:1/1}
+    .prods{gap:4mm}
+    .prod{flex-wrap:nowrap}
+    .prods.few{gap:8mm; padding-top:6mm}
+    .prods.few .pimg{flex-basis:72mm}
+    .prods.few .prod{padding:6mm}
+    a{color:inherit}
+  }
+</style>
+</head>
+<body>
+<nav class="bar" aria-label="Brochure actions">
+  <a href="../">← <span lang="hi">दुकान</span>&nbsp;/ Shop</a>
+  <button type="button" class="primary" id="print"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5v11M7 10l5 5 5-5M4.5 19.5h15"/></svg>Download Brochure <span lang="hi">/ ब्रोशर डाउनलोड करें</span></button>
+  <a class="wa" id="share" href="#">WhatsApp <span lang="hi">पर भेजें</span></a>
+</nav>
+<main class="pages" id="pages"><div class="status" id="status">Loading… <span lang="hi">लोड हो रहा है…</span></div></main>
+
+<script>
+/* BNG Foods brochure. Data comes from the same Google Sheet as the shop:
+   Products tab → products with "Brochure (Yes/No)" = Yes; Settings tab → contact details.
+   Prices are never shown. If the sheet can't be reached, store.json is used. */
+const PER_PAGE = 3;                                  // products on one A4 page
+const ROOT = "../";
+
+const HI = {                                         // Hindi for category names and badges (add more here if needed)
+  "spice powders": "पिसे मसाले", "whole spices": "साबुत मसाले", "vegetable & fruit powders": "सब्ज़ी और फल पाउडर",
+  "herbal powders": "हर्बल पाउडर", "seed & nut powders": "बीज और मेवा पाउडर", "blended masala": "मिश्रित मसाले",
+  "premium quality": "प्रीमियम क्वालिटी", "no preservatives": "कोई प्रिज़र्वेटिव नहीं",
+  "no additional colour guaranteed": "कोई अतिरिक्त रंग नहीं", "no added colour": "कोई अतिरिक्त रंग नहीं", "100% vegetarian": "100% शाकाहारी"
+};
+const hiOf = t => HI[String(t || "").trim().toLowerCase()] || "";
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const yes = v => /^(y|yes|true|1|haan|हाँ|हां)$/i.test(String(v || "").trim());
+const no  = v => /^(n|no|false|0|nahi|नहीं)$/i.test(String(v || "").trim());
+function norm(t){
+  return String(t || "").toLowerCase().normalize("NFC").replace(/़/g, "").replace(/ँ/g, "ं")
+    .replace(/[^\p{L}\p{M}\p{N}\s]/gu, " ").replace(/\s+/g, " ").trim();
+}
+const imgPath = v => { v = String(v || "").trim(); if(!v) return ""; if(/^(https?:|data:|\/)/i.test(v)) return v; return ROOT + (/^images\//i.test(v) ? v : "images/" + v); };
+function autoColor(name){
+  const n = norm(name);
+  if(/turmeric|haldi|हल्दी/.test(n)) return "#d98a14";
+  if(/chilli|chili|mirch|मिर्च/.test(n)) return "#b3141c";
+  if(/coriander|dhaniya|धनिया/.test(n)) return "#5f7a2c";
+  return ["#8b5a2b","#7d1616","#a0461f","#6b7a2c","#9a6a1c"][[...n].reduce((h, c) => h + c.charCodeAt(0), 0) % 5];
+}
+function parseCSV(text){
+  const rows = []; let row = [], cell = "", q = false;
+  for(let i = 0; i < text.length; i++){
+    const ch = text[i];
+    if(q){ if(ch === '"'){ if(text[i+1] === '"'){ cell += '"'; i++; } else q = false; } else cell += ch; }
+    else if(ch === '"') q = true;
+    else if(ch === ","){ row.push(cell); cell = ""; }
+    else if(ch === "\n" || ch === "\r"){ if(ch === "\r" && text[i+1] === "\n") i++; row.push(cell); rows.push(row); row = []; cell = ""; }
+    else cell += ch;
+  }
+  if(cell !== "" || row.length){ row.push(cell); rows.push(row); }
+  const ERR = /^#(ERROR!|NAME\?|VALUE!|REF!|N\/A|DIV\/0!|NUM!|NULL!)/i;
+  rows.forEach(r => r.forEach((c, i) => { if(ERR.test(String(c).trim())) r[i] = ""; }));
+  return rows.filter(r => r.some(c => String(c).trim() !== ""));
+}
+async function fetchCSV(url){
+  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 8000);
+  try{ const r = await fetch(url + (url.includes("?") ? "&" : "?") + "t=" + Date.now(), {signal: ctl.signal}); if(!r.ok) throw new Error(r.status); return parseCSV(await r.text()); }
+  finally{ clearTimeout(t); }
+}
+function col(head, ...names){ const h = head.map(norm); for(const n of names){ const i = h.findIndex(x => x.startsWith(n)); if(i >= 0) return i; } return -1; }
+
+/* Products tab → brochure products. One row = one pack size; rows with the same Product Name are one product. */
+function productsFromSheet(rows){
+  const [head, ...body] = rows;
+  const I = {cat: col(head, "category"), name: col(head, "product"), hindi: col(head, "hindi name", "hindi"), desc: col(head, "description"),
+    size: col(head, "pack"), img: col(head, "image"), photo: col(head, "full photo"), special: col(head, "special"), show: col(head, "show"),
+    br: col(head, "brochure yes", "brochure"), brHi: col(head, "brochure hindi"), brEn: col(head, "brochure english"), brImg: col(head, "brochure image")};
+  if(I.br < 0) return null;                                    // sheet has no Brochure column yet
+  const map = new Map();
+  for(const r of body){
+    const g = k => I[k] >= 0 ? String(r[I[k]] ?? "").trim() : "";
+    const name = g("name"); if(!name) continue;
+    let p = map.get(name);
+    if(!p){ p = {name, cat: g("cat") || "Products", hindi: g("hindi"), desc: g("desc"), textHi: g("brHi"), textEn: g("brEn"),
+                  inBrochure: false, featured: false, cover: false, img: "", live: [], all: []}; map.set(name, p); }
+    if(yes(g("br"))) p.inBrochure = true;
+    if(yes(g("special"))) p.featured = true;
+    if(yes(g("photo"))) p.cover = true;
+    for(const k of ["hindi", "desc"]) if(!p[k] && g(k)) p[k] = g(k);
+    if(!p.textHi && g("brHi")) p.textHi = g("brHi");
+    if(!p.textEn && g("brEn")) p.textEn = g("brEn");
+    if(!p.brImg && g("brImg")) p.brImg = imgPath(g("brImg"));
+    const size = g("size");
+    if(size){
+      if(!p.all.includes(size)) p.all.push(size);
+      const live = I.show < 0 || !no(g("show"));
+      if(live && !p.live.includes(size)){ p.live.push(size); if(!p.img && g("img")) p.img = imgPath(g("img")); }
+    }
+    if(!p.fallbackImg && g("img")) p.fallbackImg = imgPath(g("img"));
+  }
+  return [...map.values()].filter(p => p.inBrochure).map(p => ({...p, packs: p.live.length ? p.live : p.all, img: p.brImg || p.img || p.fallbackImg || ""}));
+}
+function productsFromStore(list){                              // backup: store.json products
+  return (list || []).map(p => ({name: p.name, cat: p.cat, hindi: p.hindi, desc: p.desc, textHi: p.brochureHindi || "", textEn: p.brochureEnglish || "",
+    featured: !!p.featured, cover: p.imageFit === "cover", packs: (p.packs || []).map(x => x[0]),
+    img: imgPath((p.packs || []).map(x => x[2]).find(Boolean) || p.image || "")}));
+}
+function settingsFromSheet(rows, shop){
+  for(const r of rows){
+    const k = norm(r[0] || ""), v = String(r[1] ?? "").trim(); if(!k || /^setting/.test(k) || !v) continue;
+    if(k.startsWith("whatsapp api")) continue;
+    if(k.startsWith("brochure cover")){ shop.brochureCover = v; continue; }
+    if(k.startsWith("brochure banner")){ shop.brochureBanner = v; continue; }
+    if(k.startsWith("brochure phone")){ shop.brochurePhones = v.split(/[,;|\n]/).map(x => x.trim()).filter(Boolean); continue; }
+    if(k.startsWith("whatsapp")){ const d = v.replace(/\D/g, ""); if(d.length >= 10) shop.whatsapp = d.length === 10 ? "91" + d : d; }
+    else if(k.startsWith("phone")) shop.phoneDisplay = v;
+    else if(k.startsWith("email")) shop.email = v;
+    else if(k.startsWith("badge")) shop.badges = v.split(/[,;|]/).map(x => x.trim()).filter(Boolean);
+    else if(k.startsWith("hindi")) shop.taglineHindi = v;
+    else if(k.startsWith("tagline")) shop.tagline = v;
+    else if(k.startsWith("fssai")) shop.certNo.fssai = v;
+    else if(k.startsWith("gst")) shop.certNo.gst = v;
+    else if(k.startsWith("udyam") || k.startsWith("udyog")) shop.certNo.udyam = v;
+  }
+}
+
+/* ---------- Rendering ---------- */
+const tick = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-6.5"/></svg>`;
+const foot = shop => `<div class="foot"><span>${esc(shop.name || "BNG Foods")} · <span lang="hi">${esc(shop.taglineHindi || "")}</span></span><b>${esc(shop.tagline || "")}</b></div>`;
+const pageHead = shop => `<div class="ph"><img src="${esc(imgPath(shop.logo || "images/logo.png"))}" alt="${esc(shop.name || "BNG Foods")}"><div class="t"><div class="hi">उत्पाद सूची</div><div class="en">Product Catalogue</div></div></div>`;
+
+function coverPage(shop, cats){
+  const cover = shop.brochureCover || shop.heroImage;
+  const badges = (shop.badges || []).map(b => `<div class="badge">${tick}<div>${hiOf(b) ? `<div class="hi">${esc(hiOf(b))}</div>` : ""}<div class="en">${esc(b)}</div></div></div>`).join("");
+  const catsLine = cats.map(c => `${hiOf(c) ? `<span lang="hi">${esc(hiOf(c))}</span> · ` : ""}${esc(c)}`).join("&nbsp;&nbsp;|&nbsp;&nbsp;");
+  return `<section class="page" aria-label="Cover">
+    <div class="band"></div>
+    <div class="cover-top">
+      <img class="logo" src="${esc(imgPath(shop.logo || "images/logo.png"))}" alt="${esc(shop.name || "BNG Foods")}">
+      <div class="tag-hi" lang="hi">${esc(shop.taglineHindi || "")}</div>
+      <div class="tag-en">${esc(shop.tagline || "")}</div>
+    </div>
+    <div class="title-box"><div class="hi" lang="hi">उत्पाद सूची</div><div class="en">Product Catalogue</div>
+      <div style="font:500 13px/1.5 var(--en); margin-top:8px; opacity:.92">${catsLine}</div></div>
+    ${cover ? `<div class="hero"><img src="${esc(imgPath(cover))}" alt="BNG Foods spice powders and whole spices"></div>` : ""}
+    <div class="section-h"><span><span class="hi">हमारी प्रक्रिया</span>Our process</span></div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><div class="hi">किसानों के खेतों से चुनाव</div><div class="en">Picked from farmers' fields</div></div>
+      <div class="step"><div class="n">2</div><div class="hi">मशीन से सफ़ाई और छँटाई</div><div class="en">Machine-cleaned and sorted</div></div>
+      <div class="step"><div class="n">3</div><div class="hi">स्टील मशीन में धीमी पिसाई</div><div class="en">Slow-ground in steel machines</div></div>
+    </div>
+    <div class="badges">${badges}</div>
+    ${foot(shop)}
+  </section>`;
+}
+function productCard(p){
+  const bg = p.cover ? "#f3e9d8" : "#fff";
+  const img = p.img ? `<img src="${esc(p.img)}" alt="${esc(p.name)}" onerror="this.parentNode.style.background='${autoColor(p.name + " " + p.hindi)}';this.outerHTML='<div class=&quot;noimg&quot;>${esc(p.hindi || p.name)}</div>'">`
+                    : `<div class="noimg" lang="hi">${esc(p.hindi || p.name)}</div>`;
+  const textHi = p.textHi, textEn = p.textEn || p.desc;
+  return `<article class="prod">
+    <div class="pimg ${p.cover ? "cover" : ""}" style="background:${p.img ? bg : autoColor(p.name + " " + p.hindi)}; border:1px solid var(--line)">${img}${p.featured ? `<span class="special">Special</span>` : ""}</div>
+    <div class="pbody">
+      ${p.hindi ? `<h2 class="pname-hi" lang="hi">${esc(p.hindi)}</h2>` : ""}
+      <h3 class="pname-en">${esc(p.name)}</h3>
+      ${textHi ? `<p class="ptext-hi" lang="hi">${esc(textHi)}</p>` : ""}
+      ${textEn ? `<p class="ptext-en">${esc(textEn)}</p>` : ""}
+      ${p.packs.length ? `<div class="packs"><span class="lbl">उपलब्ध पैक / <span>Packs</span>:</span>${p.packs.map(s => `<span class="chip">${esc(s)}</span>`).join("")}</div>` : ""}
+    </div>
+  </article>`;
+}
+function productPages(shop, products, cats){
+  const out = [];
+  for(const c of cats){
+    const items = products.filter(p => p.cat === c);
+    // spread evenly over the fewest pages: 4 → 2 + 2, 7 → 3 + 2 + 2 (never a page with a single leftover product)
+    const n = Math.ceil(items.length / PER_PAGE), base = Math.floor(items.length / n), extra = items.length % n;
+    for(let k = 0, i = 0; k < n; k++){
+      const size = base + (k < extra ? 1 : 0), slice = items.slice(i, i + size); i += size;
+      out.push(`<section class="page" aria-label="${esc(c)}">
+        <div class="band"></div>${pageHead(shop)}
+        <div class="cat">${hiOf(c) ? `<span class="hi">${esc(hiOf(c))}</span>` : ""}<span class="en">${esc(c)}</span></div>
+        <div class="prods ${size <= 2 ? "few" : ""}">${slice.map(productCard).join("")}</div>
+        ${foot(shop)}
+      </section>`);
+    }
+  }
+  return out.join("");
+}
+function contactPage(shop, certs){
+  const a = shop.address || {};
+  const addr = [a.street, a.town, a.district && "Dist. " + a.district, a.state, a.pincode].filter(Boolean).join(", ");
+  // brochure-only numbers (Settings tab → "Brochure Phone Numbers") are listed after the website phone, without repeats
+  const tel = n => { let d = String(n).replace(/\D/g, ""); if(d.length === 10) d = "91" + d; return "+" + d; };
+  const wa = shop.whatsapp ? "+" + String(shop.whatsapp).replace(/^(\d{2})(\d{5})(\d{5})$/, "$1 $2 $3") : "";
+  const phones = [shop.phoneDisplay, wa, ...(shop.brochurePhones || [])].filter(Boolean).filter((n, i, all) => all.findIndex(m => tel(m) === tel(n)) === i);
+  const site = (shop.siteUrl || "").replace(/^https?:\/\//, "").replace(/\/$/, "");
+  const regs = certs.filter(c => c.number && ["fssai", "gst", "udyam"].includes(c.id))
+    .map(c => `<div class="reg">${esc(c.label || c.name)}<b>${esc(c.number)}</b></div>`).join("");
+  return `<section class="page" aria-label="Contact">
+    <div class="band"></div>${pageHead(shop)}
+    ${shop.brochureBanner ? `<div class="banner"><img src="${esc(imgPath(shop.brochureBanner))}" alt="Whole spices"></div>` : ""}
+    <div class="contact">
+      <div class="cta"><div class="hi" lang="hi">ऑर्डर, होलसेल और डीलरशिप के लिए संपर्क करें</div><div class="en">For orders, wholesale and dealership, contact us</div></div>
+      <div class="rows">
+        ${phones.length ? `<div class="row wide"><div class="k">फ़ोन / व्हाट्सऐप · <span>Phone / WhatsApp</span></div><div class="v nums">${phones.map(n => `<a href="tel:${esc(tel(n))}">${esc(n)}</a>`).join("")}</div></div>` : ""}
+        ${shop.email ? `<div class="row"><div class="k">ईमेल / <span>Email</span></div><div class="v"><a href="mailto:${esc(shop.email)}">${esc(shop.email)}</a></div></div>` : ""}
+        ${site ? `<div class="row"><div class="k">वेबसाइट / <span>Website</span></div><div class="v"><a href="${esc(shop.siteUrl)}">${esc(site)}</a></div></div>` : ""}
+        ${addr ? `<div class="row wide"><div class="k">पता / <span>Address</span></div><div class="v" style="font-weight:600">${esc(addr)}</div></div>` : ""}
+      </div>
+      ${regs ? `<div class="regs">${regs}</div>` : ""}
+      <div class="badges" style="margin:0">${(shop.badges || []).map(b => `<div class="badge">${tick}<div>${hiOf(b) ? `<div class="hi">${esc(hiOf(b))}</div>` : ""}<div class="en">${esc(b)}</div></div></div>`).join("")}</div>
+    </div>
+    ${foot(shop)}
+  </section>`;
+}
+
+async function init(){
+  const status = document.getElementById("status");
+  let data;
+  try{ const r = await fetch(ROOT + "store.json", {cache: "no-store"}); if(!r.ok) throw new Error(r.status); data = await r.json(); }
+  catch(e){ status.textContent = "Could not load the brochure. Please refresh the page."; return; }
+  const shop = data.shop || {}; shop.certNo = {};
+  const certs = data.certificates || [];
+  let products = null;
+  const [pr, st] = await Promise.allSettled([shop.sheetProductsCsv ? fetchCSV(shop.sheetProductsCsv) : Promise.reject(), shop.sheetSettingsCsv ? fetchCSV(shop.sheetSettingsCsv) : Promise.reject()]);
+  if(pr.status === "fulfilled" && pr.value.length > 1) products = productsFromSheet(pr.value);
+  if(st.status === "fulfilled") settingsFromSheet(st.value, shop);
+  certs.forEach(c => { if(shop.certNo[c.id]) c.number = shop.certNo[c.id]; });
+  if(!products || !products.length) products = productsFromStore(data.products);
+  const cats = [...new Set(products.map(p => p.cat))];
+  document.getElementById("pages").innerHTML = coverPage(shop, cats) + productPages(shop, products, cats) + contactPage(shop, certs);
+
+  const url = (shop.siteUrl ? shop.siteUrl.replace(/\/$/, "") + "/brochure/" : location.href.split("#")[0]);
+  document.getElementById("share").href = "https://wa.me/?text=" + encodeURIComponent("BNG Foods – उत्पाद सूची / Product Catalogue\n" + url);
+  document.getElementById("share").target = "_blank";
+  document.getElementById("share").rel = "noopener";
+}
+document.getElementById("print").addEventListener("click", () => window.print());
+init();
+</script>
+</body>
+</html>

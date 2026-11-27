@@ -399,7 +399,7 @@ def main():
     shop["_lic"] = " · ".join(f"{e(c.get('label') or c['name'])} {e(c['number'])}" for c in certs if c.get("number"))
     shop["_lic_short"] = ", ".join(f"{e(c.get('label') or c['name'])} {e(c['number'])}" for c in certs if c.get("number") and c.get("id") in ("fssai", "gst")) or "FSSAI and GST registered."
     # slugs must not clash with each other or with your own folders
-    taken = {"images", "admin", "tools", "videos", "bulk-spices", "products"}
+    taken = {"images", "admin", "tools", "videos", "bulk-spices", "products", "brochure"}
     for c in cats:
         if slug(c) in taken: raise SystemExit(f"Category name '{c}' clashes with a folder name; rename it.")
         taken.add(slug(c))
@@ -426,10 +426,10 @@ def main():
     def lm(u):
         rel = (u.strip("/") + "/index.html") if u != "/" else None
         return state.get(rel, {}).get("lastmod", TODAY) if rel else TODAY
-    urls = [("/", "1.0"), ("/products/", "0.8"), ("/bulk-spices/", "0.9")] + [(f"/products/{slug(c)}/", "0.8") for c in cats] + [(f"/products/{p['slug']}/", "0.7") for p in products]
+    urls = [("/", "1.0"), ("/products/", "0.8"), ("/bulk-spices/", "0.9")] + [(f"/products/{slug(c)}/", "0.8") for c in cats] + [(f"/products/{p['slug']}/", "0.7") for p in products] + [("/brochure/", "0.6")]
     home_lm = max([v["lastmod"] for v in state.values()] + ["2000-01-01"])
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-          "".join(f"  <url><loc>{site}{u}</loc><lastmod>{home_lm if u == '/' else lm(u)}</lastmod><priority>{pr}</priority></url>\n" for u, pr in urls) + "</urlset>\n")
+          "".join(f"  <url><loc>{site}{u}</loc><lastmod>{home_lm if u in ('/', '/brochure/') else lm(u)}</lastmod><priority>{pr}</priority></url>\n" for u, pr in urls) + "</urlset>\n")
     write("robots.txt", f"User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /tools/\n\nSitemap: {site}/sitemap.xml\n")
 
     # remove pages of products that are no longer live (only pages this script made earlier)

@@ -653,6 +653,8 @@
   @media (min-width:921px){ .hero-in{padding-top:52px;padding-bottom:52px} .hero-cta .btn{min-width:180px} }
   .hero-copy{width:100%;max-width:720px}
   .hero-cta .btn{white-space:nowrap}
+  .hero-cta{flex-wrap:wrap}
+  @media (max-width:600px){ .hero-cta .btn-brochure{flex-basis:100%} }
 
   /* product without a photo (or photo missing): spice-coloured label instead of an empty box */
   .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px;text-align:center;color:color-mix(in srgb,var(--c) 75%,#2a1a12)}
@@ -719,6 +721,7 @@
       <a href="#gallery" data-nav="gallery"><i data-ico="play"></i><span data-t="nav_gallery">Behind the Masala</span></a>
       <a href="#certificates" data-nav="certificates"><i data-ico="shield"></i><span data-t="nav_certs">Certificates</span></a>
       <a href="#careers" data-nav="careers"><i data-ico="bag"></i><span data-t="nav_careers">Careers</span></a>
+      <a href="brochure/"><i data-ico="download"></i><span data-t="nav_brochure">Download Brochure</span></a>
     </nav>
     <div class="hdr-acts">
       <div class="top-contact"><a id="phoneLink"></a><br><span id="emailText"></span></div>
@@ -741,6 +744,7 @@
       <div class="hero-cta">
         <a class="btn btn-gold" href="#shop" data-scroll-shop><i data-ico="basket"></i><span data-t="shop_now">Shop now</span></a>
         <button class="btn btn-line" data-bulk><i data-ico="sack"></i><span data-t="bulk_order">Bulk order</span></button>
+        <a class="btn btn-line btn-brochure" href="brochure/"><i data-ico="download"></i><span data-t="nav_brochure">Download Brochure</span></a>
       </div>
     </div>
   </div>
@@ -893,7 +897,7 @@
 <footer>
   <div class="wrap ft">
     <div class="ft-brand"><span id="ftLogo"></span><p id="ftIntro" lang="hi">स्वाद की पहचान · The Real Taste of Bharat</p></div>
-    <nav class="ft-links" aria-label="Footer"><a href="#home" data-t="nav_shop">Shop</a><a href="#gallery" data-t="nav_gallery">Behind the Masala</a><a href="#certificates" data-t="nav_certs">Certificates</a><a href="#careers" data-t="nav_careers">Careers</a></nav>
+    <nav class="ft-links" aria-label="Footer"><a href="#home" data-t="nav_shop">Shop</a><a href="#gallery" data-t="nav_gallery">Behind the Masala</a><a href="#certificates" data-t="nav_certs">Certificates</a><a href="#careers" data-t="nav_careers">Careers</a><a href="brochure/" data-t="nav_brochure">Download Brochure</a></nav>
     <div class="ft-contact" id="ftContact"></div>
     <div class="ft-addr" id="ftAddr">Badnagar, Ujjain District, Madhya Pradesh 456771</div>
     <nav class="ft-seo" aria-label="Products"><a href="products/">All products</a><a href="bulk-spices/">Bulk spices supplier</a><span id="ftCats"></span></nav>
@@ -1792,7 +1796,7 @@ const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matche
 
 /* ---------- Language (EN / हिंदी) ---------- */
 const DICT = {
-  en: {nav_shop:"Shop", nav_gallery:"Behind the Masala", nav_factory:"Factory", nav_certs:"Certificates", nav_certs_s:"Licences", nav_careers:"Careers",
+  en: {nav_shop:"Shop", nav_gallery:"Behind the Masala", nav_factory:"Factory", nav_certs:"Certificates", nav_certs_s:"Licences", nav_careers:"Careers", nav_brochure:"Download Brochure",
     bulk_enquiry:"Bulk Enquiry", hero_eyebrow:"Direct from our factory", shop_now:"Shop now", bulk_order:"Bulk order",
     proc_eyebrow:"How it's made", proc_title:"From farm to your kitchen", step1:"Select", step2:"Clean & sort", step3:"Grind", step4:"Pack & deliver",
     b2b_eyebrow:"Manufacturer direct", b2b_title:"Bulk Order for Your Business", bulk_quote:"Get Bulk Price Quote", or_call:"Or call / WhatsApp",
@@ -1801,7 +1805,7 @@ const DICT = {
     add:"Add", your_order:"Your order", cart_empty:"Your cart is empty. Choose a pack size and add products to start.", order_again:"Order again",
     checkout:"Checkout", clear_cart:"Clear cart", item:"item", items:"items", reorder_t:"Order your usual again?", reorder_done:"Your last order is in the cart",
     see_product:"Shop", bulk_more:"Bulk price list & details →"},
-  hi: {nav_shop:"खरीदें", nav_gallery:"मसाला कैसे बनता है", nav_factory:"फैक्ट्री", nav_certs:"प्रमाण पत्र", nav_certs_s:"लाइसेंस", nav_careers:"नौकरी",
+  hi: {nav_shop:"खरीदें", nav_gallery:"मसाला कैसे बनता है", nav_factory:"फैक्ट्री", nav_certs:"प्रमाण पत्र", nav_certs_s:"लाइसेंस", nav_careers:"नौकरी", nav_brochure:"ब्रोशर डाउनलोड करें",
     bulk_enquiry:"थोक पूछताछ", hero_eyebrow:"सीधे हमारी फैक्ट्री से", shop_now:"अभी खरीदें", bulk_order:"थोक ऑर्डर",
     hero_intro:"प्रीमियम मसाले, हमारी अपनी यूनिट में तैयार और पैक। रिटेल पैक या थोक में सीधे फैक्ट्री से मंगाएँ।",
     proc_eyebrow:"कैसे बनता है", proc_title:"खेत से आपकी रसोई तक", step1:"चुनाव", step2:"सफ़ाई और छँटाई", step3:"पिसाई", step4:"पैकिंग और डिलीवरी",
