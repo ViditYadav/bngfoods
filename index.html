@@ -383,6 +383,44 @@
   .sheet .form-go{margin-top:14px}
   .sheet .btn{min-height:52px;font-size:16px}
   .pin-hint{font-size:12px;color:var(--ok);margin-top:3px}
+  /* forms v3: sections, chips, order summary */
+  .fs{margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:16px;background:#fffdf9}
+  .fs-h{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;color:var(--maroon-d)}
+  .fs-n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--maroon);color:#fff;font-size:12.5px;font-weight:800;flex:none}
+  .fs label:first-of-type{margin-top:12px}
+  .fs-intro{margin:6px 0 0;font-size:14px;color:var(--muted);line-height:1.45}
+  .lbl{font-size:12.5px;font-weight:700;margin:14px 0 7px;color:#5a3a22}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{min-height:42px;padding:9px 14px;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-size:14px;font-weight:600;color:#4a3426;cursor:pointer;transition:background .15s,border-color .15s,color .15s;text-align:left}
+  .chip:hover{border-color:#d8b98a}
+  .chip[aria-checked="true"]{background:var(--maroon);border-color:var(--maroon);color:#fff}
+  .chip:focus-visible{outline:3px solid rgba(200,32,42,.35);outline-offset:2px}
+  .ph-in{display:flex;align-items:stretch;border:1.5px solid var(--line);border-radius:12px;background:#fff;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+  .ph-in:focus-within{border-color:var(--brand);box-shadow:0 0 0 4px rgba(200,32,42,.1)}
+  .ph-in span{display:grid;place-items:center;padding:0 12px;background:#faf3e7;color:#5a3a22;font-weight:700;border-right:1.5px solid var(--line)}
+  .ph-in input{border:0;border-radius:0;box-shadow:none !important}
+  .ph-in.bad{border-color:#b91c1c;animation:shake .35s}
+  .ph-in.bad + .err{display:block}
+  .co-items{margin-top:12px;padding:12px 14px;background:#fff6e6;border:1px solid #f0dfbf;border-radius:16px}
+  .co-items .ci{display:flex;gap:8px;align-items:baseline;padding:4px 0;font-size:14px}
+  .co-items .q{font-weight:800;color:var(--maroon);min-width:28px}
+  .co-items .n{flex:1;min-width:0}
+  .co-items .n small{color:var(--muted);font-weight:600}
+  .co-items .a{font-weight:700;white-space:nowrap}
+  .co-items .tot{border-top:1px solid #ecd9b3;margin-top:6px;padding-top:8px;font-weight:800}
+  .co-items .tot .a{color:var(--maroon);font-size:16px}
+  .co-edit{margin-top:6px;border:0;background:none;padding:4px 0;color:var(--brand);font-weight:700;font-size:13px;cursor:pointer;text-decoration:underline}
+  .trust{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:#3f6b2f;font-weight:600}
+  .trust li{display:flex;align-items:center;gap:5px}
+  .trust .ico{width:16px;height:16px}
+  @media (max-width:480px){ .row.row-1m{grid-template-columns:1fr;gap:0} }
+  .hi-l{font-family:Hind,Inter,sans-serif;font-weight:600;color:#9a6b3f;margin-left:4px}
+  .fs-h .hi-l{font-size:14px;margin-left:6px}
+  .sheet-head .hi-l{font-size:16px;font-weight:600}
+  .chip small{display:block;font-family:Hind,Inter,sans-serif;font-size:12px;font-weight:500;line-height:1.25;opacity:.85}
+  .err span[lang="hi"],.trust span[lang="hi"],.fs-intro span[lang="hi"],.co-items span[lang="hi"]{font-family:Hind,Inter,sans-serif}
+  .sheet .btn{line-height:1.25;text-align:center}
+  textarea::placeholder,input::placeholder{line-height:1.45}
   .sending{display:flex;flex-direction:column;align-items:center;gap:14px;padding:36px 0;color:var(--muted)}
   .spin{width:44px;height:44px;border-radius:50%;border:4px solid #f3e2c4;border-top-color:var(--brand);animation:spin .8s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
@@ -1133,60 +1171,105 @@ const field = (id, lbl, attrs, err) => `<label for="f-${id}">${lbl}</label><inpu
 
 const KIND = {order: "order", bulk: "enquiry", job: "application"};
 const pinCity = () => `<div class="row">
-  <div>${field("pincode", "Pincode", 'inputmode="numeric" maxlength="6" autocomplete="postal-code" placeholder="6-digit pincode"', "Enter a valid 6-digit pincode.")}<div class="pin-hint" id="pinHint" aria-live="polite"></div></div>
-  <div>${field("city", "City / Town", 'autocomplete="address-level2"', "Please enter your city.")}</div>
+  <div>${field("pincode", bi("Pincode", "पिनकोड"), 'inputmode="numeric" maxlength="6" autocomplete="postal-code" placeholder="6-digit / 6 अंक"', 'Enter a valid 6-digit pincode. · <span lang="hi">सही 6 अंकों का पिनकोड लिखें।</span>')}<div class="pin-hint" id="pinHint" aria-live="polite"></div></div>
+  <div>${field("city", bi("City / Town", "शहर / कस्बा"), 'autocomplete="address-level2"', 'Please enter your city. · <span lang="hi">अपना शहर लिखें।</span>')}</div>
 </div>`;
 const opts = (name, list, def) => `<select id="f-${name}" name="${name}">${list.map(o => `<option ${(customer[name] || def) === o ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
 const visibleJobs = () => JOBS.filter(j => j.title && j.show !== false);
 
 function renderForm(kind){
   const bulk = kind === "bulk", job = kind === "job";
-  const title = job ? "Apply for a job" : bulk ? "Bulk enquiry" : "Checkout";
-  const btn = job ? ico("bag") + "Submit application" : bulk ? ico("sack") + "Continue" : ico("chilli") + "Place order";
+  const title = job ? bi("Apply for a job", "नौकरी के लिए आवेदन") : bulk ? bi("Bulk enquiry", "थोक पूछताछ") : bi("Checkout", "ऑर्डर की जानकारी");
+  let btn = job ? ico("bag") + "Submit application · आवेदन भेजें" : bulk ? ico("sack") + "Send enquiry · पूछताछ भेजें" : ico("chilli") + "Place order · ऑर्डर करें";
+  const sec = (n, en, hi) => `<div class="fs-h"><span class="fs-n">${n}</span>${en}<span class="hi-l" lang="hi">${hi}</span></div>`;
+  const opt = `<span class=opt>(optional · <span lang="hi">वैकल्पिक</span>)</span>`;
   let middle;
   if(job){
     const positions = [...visibleJobs().map(j => j.title), "Any suitable job"];
     if(!positions.includes(customer.position)) customer.position = positions[0];
     middle = `
-      <label for="f-position">Job you are applying for</label>${opts("position", positions, positions[0])}
-      <label for="f-exp">Experience</label>${opts("exp", ["Fresher (no experience)", "Less than 1 year", "1–3 years", "3–5 years", "5+ years"], "Fresher (no experience)")}
+      <label for="f-position">${bi("Job you are applying for", "किस नौकरी के लिए")}</label>${opts("position", positions, positions[0])}
+      <label for="f-exp">${bi("Experience", "अनुभव")}</label>${opts("exp", ["Fresher (no experience)", "Less than 1 year", "1–3 years", "3–5 years", "5+ years"], "Fresher (no experience)")}
       ${pinCity()}
-      <label for="f-about">About you <span class=opt>(optional)</span></label>
-      <textarea id="f-about" name="about" rows="2" placeholder="Education, previous work, machines you can run…">${esc(customer.about || "")}</textarea>
+      <label for="f-about">${bi("About you", "अपने बारे में")} ${opt}</label>
+      <textarea id="f-about" name="about" rows="3" placeholder="Education, previous work, machines you can run… / पढ़ाई, पिछला काम, कौन सी मशीन चला सकते हैं…">${esc(customer.about || "")}</textarea>
       <div class="note" lang="hi">आवेदन भेजने के बाद आप अपना Resume / Biodata WhatsApp पर भेज सकते हैं। · You can send your resume on WhatsApp after applying.</div>`;
   } else if(bulk){
     middle = `
-      <label for="f-btype">Business type</label>${opts("btype", ["Retailer / Kirana store","Wholesaler / Distributor","Restaurant / Hotel / Caterer","Food manufacturer","Private label / Own brand","Other"], "Retailer / Kirana store")}
-      <label for="f-notes">What do you need?</label>
-      <textarea id="f-notes" name="notes" rows="2" placeholder="Products, quantity (kg), packing, frequency…">${esc(customer.notes || "")}</textarea>
-      <div class="err">Tell us what you'd like to order.</div>
-      ${pinCity()}`;
+      <div class="fs">${sec(2, "What do you need?", "आपको क्या चाहिए?")}
+        <label for="f-notes">${bi("Products, quantity and packing", "प्रोडक्ट, मात्रा और पैकिंग")}</label>
+        <textarea id="f-notes" name="notes" rows="4" placeholder="e.g. Haldi powder 100 kg, Lal mirchi 50 kg in 25 kg bags. Need samples first.&#10;उदा. हल्दी पाउडर 100 किलो, लाल मिर्च 50 किलो, 25 किलो के बैग में।">${esc(customer.notes || "")}</textarea>
+        <div class="err">Please tell us what you need. · <span lang="hi">बताएं कि आपको क्या चाहिए।</span></div>
+      </div>
+      <div class="fs">${sec(3, "Delivery location", "डिलीवरी की जगह")}${pinCity()}</div>
+      <ul class="trust"><li>${ico("check")}Factory-direct bulk prices · <span lang="hi">फैक्ट्री से सीधा थोक भाव</span></li><li>${ico("check")}Free samples on request · <span lang="hi">माँगने पर फ्री सैंपल</span></li><li>${ico("check")}We call you with prices · <span lang="hi">हम कॉल करके भाव बताएंगे</span></li></ul>`;
   } else {
+    const t = totals();
     middle = `
-      ${pinCity()}
-      ${field("notes", "Notes <span class=opt>(optional)</span>", 'placeholder="GST no., landmark, etc."')}
-      <div class="co-sum" id="coTotals"></div>
-      <div class="note" lang="hi">BNG Foods टीम आपको पता और पेमेंट के लिए कॉल करेगी। · Our team will call you for address & payment.</div>`;
+      <div class="fs">${sec(2, "Delivery", "डिलीवरी")}
+        ${pinCity()}
+        <label for="f-address">${bi("Delivery address", "डिलीवरी का पता")}</label>
+        <textarea id="f-address" name="address" rows="3" autocomplete="street-address" placeholder="House / shop no., street, area, landmark&#10;मकान / दुकान नं., गली, इलाका, लैंडमार्क">${esc(customer.address || "")}</textarea>
+        <div class="err">Please enter your delivery address. · <span lang="hi">डिलीवरी का पता लिखें।</span></div>
+      </div>
+      <div class="fs">${sec(3, "Payment", "भुगतान")}
+        <div class="chips" role="radiogroup" aria-label="Payment">${PAY.map(o => chip("pay", o, payNow() === o, true)).join("")}</div>
+        ${field("notes", bi("Notes", "नोट") + " " + opt, 'placeholder="GST no., delivery time / GST नंबर, समय"')}
+      </div>
+      <ul class="trust"><li>${ico("check")}We call to confirm · <span lang="hi">हम कॉल करके कन्फ़र्म करेंगे</span></li><li>${ico("check")}Freshly packed · <span lang="hi">ताज़ा पैक</span></li></ul>`;
+    btn = ico("chilli") + "Place order · ऑर्डर करें · " + inr(t.total);
   }
-  $("#sheet").innerHTML = head(title) + `
+  const intro = bulk ? `<p class="fs-intro">For shops, wholesalers, hotels and businesses. Fill in what you know – our team will call you with prices.<br><span lang="hi">दुकान, होलसेलर, होटल और व्यापार के लिए। जो पता हो वह भरें – हमारी टीम आपको भाव बताने के लिए कॉल करेगी।</span></p>`
+    : kind === "order" ? orderSummary() : "";
+  $("#sheet").innerHTML = head(title) + intro + `
     <form id="form" novalidate>
-      ${field("name", bulk ? "Name / Business name" : "Full name", 'autocomplete="name"', "Please enter your name.")}
-      ${field("phone", "Mobile number", 'type="tel" inputmode="numeric" maxlength="13" autocomplete="tel-national" placeholder="10-digit mobile" enterkeyhint="next"', "Enter a valid 10-digit mobile number.")}
+      ${job ? "" : `<div class="fs">${bulk ? sec(1, "Your business", "आपका व्यापार") : sec(1, "Your details", "आपकी जानकारी")}`}
+      ${bulk ? `<div class="lbl" id="l-btype">${bi("Business type", "व्यापार का प्रकार")}</div><div class="chips" role="radiogroup" aria-labelledby="l-btype">${["Retailer / Kirana store","Wholesaler / Distributor","Restaurant / Hotel / Caterer","Food manufacturer","Private label / Own brand","Other"].map(o => chip("btype", o, (customer.btype || "Retailer / Kirana store") === o, true)).join("")}</div>` : ""}
+      ${field("name", bulk ? bi("Your name", "आपका नाम") : bi("Full name", "पूरा नाम"), 'autocomplete="name" placeholder="Name / नाम"', 'Please enter your name. · <span lang="hi">कृपया अपना नाम लिखें।</span>')}
+      <label for="f-phone">${bi("Mobile number", "मोबाइल नंबर")}</label>
+      <div class="ph-in"><span aria-hidden="true">+91</span><input id="f-phone" name="phone" value="${esc(customer.phone || "")}" type="tel" inputmode="numeric" maxlength="13" autocomplete="tel-national" placeholder="10-digit mobile / 10 अंकों का मोबाइल" enterkeyhint="next"></div>
+      <div class="err" id="e-phone">Enter a valid 10-digit mobile number. · <span lang="hi">सही 10 अंकों का मोबाइल नंबर लिखें।</span></div>
+      ${bulk ? `<div class="row row-1m">
+        <div>${field("firm", bi("Shop / firm name", "दुकान / फर्म का नाम") + " " + opt, 'autocomplete="organization"')}</div>
+        <div>${field("gstin", "GSTIN " + opt, 'maxlength="15" autocapitalize="characters" placeholder="15 characters / 15 अक्षर"', 'GSTIN should be 15 letters/numbers. · <span lang="hi">GSTIN 15 अक्षर/अंकों का होता है।</span>')}</div>
+      </div>` : ""}
+      ${job ? "" : "</div>"}
       ${middle}
       <div class="stack form-go"><button class="btn btn-primary" type="submit">${btn}</button></div>
     </form>`;
-  if(kind === "order") coTotals();
   const form = $("#form");
+  form.addEventListener("click", e => {
+    const c = e.target.closest(".chip"); if(!c) return;
+    const {f, v, one} = c.dataset;
+    if(one !== undefined){ customer[f] = v; form.querySelectorAll(`.chip[data-f="${f}"]`).forEach(x => x.setAttribute("aria-checked", x === c)); }
+
+    save();
+  });
   form.querySelectorAll("select").forEach(s => customer[s.name] = s.value);
   form.addEventListener("input", e => {
     const el = e.target;
     if(el.name === "pincode"){ const v = el.value.replace(/\D/g, "").slice(0, 6); if(v !== el.value) el.value = v; lookupPin(v); }
     if(el.name === "city") customer._cityAuto = false;
-    customer[el.name] = el.value; el.classList.remove("invalid"); save();
+    customer[el.name] = el.value; el.classList.remove("invalid"); el.parentNode.classList.remove("bad"); save();
   });
   form.addEventListener("submit", e => { e.preventDefault(); if(validate(kind)) finish(kind); });
   if(/^[1-9]\d{5}$/.test(customer.pincode || "")) lookupPin(customer.pincode);
 }
+// Hindi shown under each choice; the English value is what goes into the message
+const CHIP_HI = {"Retailer / Kirana store": "रिटेलर / किराना दुकान", "Wholesaler / Distributor": "होलसेलर / डिस्ट्रीब्यूटर", "Restaurant / Hotel / Caterer": "रेस्टोरेंट / होटल / कैटरर",
+  "Food manufacturer": "फूड मैन्युफैक्चरर", "Private label / Own brand": "अपना ब्रांड", "Other": "अन्य", "UPI": "यूपीआई", "Cash on delivery (COD)": "कैश ऑन डिलीवरी", "IMPS / RTGS": "बैंक ट्रांसफर"};
+const bi = (en, hi) => `${en} <span class="hi-l" lang="hi">${hi}</span>`;
+const chip = (f, v, on, one = false) => `<button type="button" class="chip" data-f="${f}" data-v="${esc(v)}" ${one ? `data-one role="radio" aria-checked="${on}"` : `aria-pressed="${on}"`}>${esc(v)}${CHIP_HI[v] ? `<small lang="hi">${CHIP_HI[v]}</small>` : ""}</button>`;
+function orderSummary(){
+  const t = totals();
+  return `<div class="co-items">${t.L.map(l => `<div class="ci"><span class="q">${l.q}×</span><span class="n">${esc(l.p.name)} <small>${esc(l.size)}</small></span><span class="a">${inr(l.sum)}</span></div>`).join("")}
+    <div class="ci tot"><span class="n">Total <span lang="hi">कुल</span> · ${t.count} pack${t.count === 1 ? "" : "s"}</span><span class="a">${inr(t.total)}</span></div>
+    <button type="button" class="co-edit" data-edit-cart>Edit order · <span lang="hi">ऑर्डर बदलें</span></button></div>`;
+}
+const PAY = ["UPI", "Cash on delivery (COD)", "IMPS / RTGS"];
+const payNow = () => PAY.includes(customer.pay) ? customer.pay : PAY[0];
+const fmtPhone = v => { const d = String(v || "").replace(/\D/g, "").slice(-10); return d.length === 10 ? `+91 ${d.slice(0, 5)} ${d.slice(5)}` : v; };
+const stamp = () => { try{ return new Date().toLocaleString("en-IN", {day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit", timeZone: "Asia/Kolkata"}); }catch{ return new Date().toLocaleString(); } };
 function coTotals(){
   const t = totals();
   $("#coTotals").innerHTML = `<span>${t.count} item${t.count===1?"":"s"}</span><b>Total ${inr(t.total)}</b>`;
@@ -1215,13 +1298,17 @@ async function lookupPin(pin){
 
 function validate(kind){
   let ok = true;
-  const chk = (id, bad) => { const el = $("#f-" + id); if(!el) return; el.classList.toggle("invalid", bad); if(bad){ if(ok){ el.focus(); el.scrollIntoView({block:"center", behavior:"smooth"}); } ok = false; } };
+  const chk = (id, bad) => { const el = $("#f-" + id); if(!el) return; el.classList.toggle("invalid", bad); el.parentNode.classList.toggle("bad", bad && el.parentNode.classList.contains("ph-in")); if(bad){ if(ok){ el.focus(); el.scrollIntoView({block:"center", behavior:"smooth"}); } ok = false; } };
   const digits = (customer.phone || "").replace(/\D/g, "").slice(-10);
   chk("name", !(customer.name || "").trim());
   chk("phone", !/^[6-9]\d{9}$/.test(digits));
-  if(kind === "bulk") chk("notes", !(customer.notes || "").trim());
+  if(kind === "bulk"){
+    chk("notes", !(customer.notes || "").trim());
+    const g = (customer.gstin || "").trim(); chk("gstin", !!g && !/^[0-9A-Z]{15}$/i.test(g));
+  }
   chk("pincode", !/^[1-9]\d{5}$/.test((customer.pincode || "").trim()));
   chk("city", !(customer.city || "").trim());
+  if(kind === "order") chk("address", !(customer.address || "").trim());
   return ok;
 }
 
@@ -1249,25 +1336,30 @@ async function autoSend(subject, text){
 async function finish(kind){
   const c = k => (customer[k] || "").trim();
   const id = "BNG" + Date.now().toString(36).toUpperCase().slice(-6);
+  const when = stamp(), loc = `${c("city")}${c("state") ? ", " + c("state") : ""} – ${c("pincode")}`;
   const place = [`City: ${c("city")}${c("state") ? ", " + c("state") : ""}`, `Pincode: ${c("pincode")}`];
   let text, subject;
   if(kind === "bulk"){
-    subject = `Bulk enquiry #${id} – ${c("name")} – ${c("city")} ${c("pincode")}`;
-    text = [`*Bulk enquiry – ${SHOP.name}*`, `Ref #${id}`, ``, `Name: ${c("name")}`, `Phone: ${c("phone")}`, `Business: ${c("btype") || "Retailer / Kirana store"}`, ...place, ``, `Requirement:`, c("notes")].join("\n");
+    subject = `Bulk enquiry #${id} – ${c("firm") || c("name")} – ${c("city")} ${c("pincode")}`;
+    text = [`*Bulk enquiry – ${SHOP.name}*`, `Ref #${id} · ${when}`, ``,
+      `*Business*`, `Name: ${c("name")}`, ...(c("firm") ? [`Firm: ${c("firm")}`] : []), `Type: ${c("btype") || "Retailer / Kirana store"}`,
+      `Mobile: ${fmtPhone(c("phone"))}`, ...(c("gstin") ? [`GSTIN: ${c("gstin").toUpperCase()}`] : []), ``,
+      `*Requirement*`, c("notes"), ``,
+      `*Location*`, loc, ``, `Next step: call the customer with bulk prices.`].join("\n");
   } else if(kind === "job"){
     subject = `Job application #${id} – ${c("position")} – ${c("name")}`;
-    text = [`*Job application – ${SHOP.name}*`, `Ref #${id}`, ``, `Position: ${c("position")}`, `Name: ${c("name")}`, `Phone: ${c("phone")}`, `Experience: ${c("exp")}`, ...place,
+    text = [`*Job application – ${SHOP.name}*`, `Ref #${id} · ${when}`, ``, `Position: ${c("position")}`, `Name: ${c("name")}`, `Mobile: ${fmtPhone(c("phone"))}`, `Experience: ${c("exp")}`, ...place,
       ...(c("about") ? [``, `About:`, c("about")] : [])].join("\n");
   } else {
     const t = totals();
     saveLastOrder();
     subject = `New order #${id} – ${c("name")} – ${inr(t.total)}`;
-    text = [`*New order – ${SHOP.name}*`, `Order #${id}`, ``,
-      ...t.L.map(l => `${l.q} x ${l.p.name} (${l.size}) – ${inr(l.sum)}`), ``,
-      `*Total: ${inr(t.total)}*`, ``,
-      `Name: ${c("name")}`, `Phone: ${c("phone")}`, ...place,
-      ...(c("notes") ? [`Notes: ${c("notes")}`] : []),
-      ``, `Call customer for address & payment.`].join("\n");
+    text = [`*New order – ${SHOP.name}*`, `Order #${id} · ${when}`, ``,
+      `*Items*`, ...t.L.map((l, n) => `${n + 1}. ${l.p.name} – ${l.size} × ${l.q} = ${inr(l.sum)}`),
+      `*Total: ${inr(t.total)}* (${t.count} pack${t.count === 1 ? "" : "s"})`, ``,
+      `*Customer*`, `Name: ${c("name")}`, `Mobile: ${fmtPhone(c("phone"))}`, ...(c("address") ? [`Address: ${c("address")}`] : []), `City: ${loc}`,
+      `Payment: ${payNow()}`, ...(c("notes") ? [`Notes: ${c("notes")}`] : []),
+      ``, `Next step: call the customer to confirm the order, delivery and payment.`].join("\n");
   }
   const wa = `https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(text)}`;
   const word = KIND[kind];
@@ -1379,6 +1471,7 @@ document.addEventListener("click", async e => {
   else if(d.pick){ pickPack(d.pick, +d.i); }
   else if(d.cat){ activeCat = d.cat; render(); }
   else if("checkout" in d) openSheet("checkout");
+  else if("editCart" in d) openSheet("cart");
   else if("bulk" in d) openSheet("bulk");
   else if("apply" in d){ customer.position = d.apply || customer.position; openSheet("job"); }
   else if("g" in d) openLightbox(+d.g);
