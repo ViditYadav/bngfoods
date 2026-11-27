@@ -573,10 +573,13 @@
   .lb-x{position:absolute;top:12px;right:12px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:22px;cursor:pointer}
   .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:22px;cursor:pointer}
   .lb-prev{left:10px}.lb-next{right:10px}
+  .lb-nav{z-index:1;background:rgba(20,10,5,.6);box-shadow:0 0 0 1px rgba(255,255,255,.25)}
   .lb-body{max-width:min(1000px,100%);max-height:calc(100vh - 120px);display:flex;align-items:center;justify-content:center}
   .lb-body img,.lb-body video{max-width:100%;max-height:calc(100vh - 120px);border-radius:12px;display:block;animation:popIn .3s var(--ease)}
   .lb-body iframe{border:0;border-radius:12px;background:#000;width:min(960px,92vw);aspect-ratio:16/9}
   .lb-body iframe.tall{width:min(400px,92vw);aspect-ratio:auto;height:min(720px,calc(100vh - 130px))}
+  .lb-body img.on-white{background:#fff;padding:14px}
+  #catalog .swatch.has-img{cursor:zoom-in}
   .lb-cap{color:#f1dccb;font-size:14.5px;margin-top:12px;text-align:center;max-width:70ch}
   .lb-cap a{color:var(--gold)}
 
@@ -1405,13 +1408,25 @@ document.addEventListener("pointerout", e => {
   img.style.setProperty("--ry", "0deg"); img.style.setProperty("--rx", "0deg"); sw.classList.remove("touching");
 }, {passive: true});
 // Swipe left / right on a packet to change pack size (phones)
-let sw0 = null;
+let sw0 = null, lastSwipe = 0;
+// Tap a product photo: open it full screen (all pack photos, starting at the selected pack)
+document.addEventListener("click", e => {
+  const sw = e.target.closest && e.target.closest("#catalog .swatch.has-img[data-pid]"); if(!sw || Date.now() - lastSwipe < 500) return;
+  const p = PRODUCTS.find(x => x.id === sw.dataset.pid); if(!p) return;
+  const list = [], cur = p.packs[selected[p.id] ?? 0];
+  p.packs.forEach(pk => { const src = pk[2] || p.image; if(!src) return;
+    const hit = list.find(x => x.src === src);
+    if(hit) hit.title += ` / ${pk[0]}`; else list.push({kind: "photo", white: p.imageFit !== "cover", src, title: `${p.name} · ${pk[0]}`, hindi: p.hindi, packs: [pk[0]]});
+    if(hit) hit.packs.push(pk[0]); });
+  if(!list.length) return;
+  openLightbox(Math.max(0, list.findIndex(x => x.packs.includes(cur[0]))), list);
+});
 document.addEventListener("touchstart", e => { const sw = e.target.closest(".swatch[data-pid]"); if(!sw) return; sw.classList.add("touching");
   sw0 = {sw, x: e.touches[0].clientX, y: e.touches[0].clientY}; }, {passive: true});
 document.addEventListener("touchend", e => { if(!sw0) return; const {sw, x, y} = sw0; sw0 = null; sw.classList.remove("touching");
   const t = e.changedTouches[0], dx = t.clientX - x, dy = t.clientY - y; const img = tiltImg(sw);
   if(img){ img.style.setProperty("--ry", "0deg"); img.style.setProperty("--rx", "0deg"); }
-  if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5){ const id = sw.dataset.pid; pickPack(id, (selected[id] ?? 0) + (dx < 0 ? 1 : -1)); }
+  if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5){ lastSwipe = Date.now(); const id = sw.dataset.pid; pickPack(id, (selected[id] ?? 0) + (dx < 0 ? 1 : -1)); }
 }, {passive: true});
 
 /* ---------- Thank-you page (#thank-you) ---------- */
@@ -1515,13 +1530,13 @@ function route(){
   if(changed && document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches && route._ready) document.startViewTransition(swap); else swap();
   route._ready = true;
   document.querySelectorAll("[data-nav]").forEach(a => a.dataset.nav === v ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
-  if(changed){ if(sheetView && sheetView !== "done") closeSheet(); closeLightbox(); window.scrollTo(0, 0); }
+  if(changed){ if(sheetView && sheetView !== "done") closeSheet(); closeLightbox(true); window.scrollTo(0, 0); }
   document.title = v === "shop" ? HOME_TITLE : `${TITLES[v]} – ${SHOP.name || "BNG Foods"}`;   // keep the search-friendly title on the home page
 }
 window.addEventListener("hashchange", route);
 
 /* Gallery: photos, video files, YouTube (incl. Shorts), Instagram reels/posts, Facebook videos/reels */
-let galFilter = "all", lbList = [], lbIdx = 0;
+let galFilter = "all", lbList = [], lbIdx = 0, lbPushed = false;
 function media(it){
   const src = String(it.src || "").trim(), cover = imgPath(it.cover);
   let m;
@@ -1571,20 +1586,28 @@ function openLightbox(i, list){
   const it = lbList[lbIdx]; if(!it) return;
   const body = it.embed ? `<iframe class="${it.tall ? "tall" : ""}" src="${esc(it.embed)}" title="${esc(it.title || "Video")}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>`
     : it.kind === "video" ? `<video src="${esc(it.src)}" controls autoplay playsinline ${it.thumb ? `poster="${esc(it.thumb)}"` : ""}></video>`
-    : `<img src="${esc(it.src)}" alt="${esc(it.title || "")}">`;
+    : `<img src="${esc(it.src)}" alt="${esc(it.title || "")}" ${it.white ? `class="on-white"` : ""}>`;
   $("#lbBody").innerHTML = body;
   $("#lbCap").innerHTML = [it.title ? `<b>${esc(it.title)}</b>` : "", it.hindi ? `<span lang="hi">${esc(it.hindi)}</span>` : "",
     it.link ? `<a href="${esc(it.link)}" target="_blank" rel="noopener">Open on ${esc(it.via)}</a>` : ""].filter(Boolean).join(" · ");
   document.querySelectorAll(".lb-nav").forEach(b => b.hidden = lbList.length < 2);
+  if(!$("#lb").classList.contains("open") && !lbPushed){ try{ history.pushState({lb: 1}, ""); lbPushed = true; }catch{} }   // phone Back closes the viewer
   $("#lb").classList.add("open"); document.body.style.overflow = "hidden";
   $(".lb-x").focus();
 }
 function stepLightbox(n){ openLightbox(lbIdx + n); }
-function closeLightbox(){
+function closeLightbox(fromHistory){
   const lb = $("#lb"); if(!lb || !lb.classList.contains("open")) return;
   lb.classList.remove("open"); $("#lbBody").innerHTML = "";               // stops video playback
   if(!sheetView) document.body.style.overflow = "";
+  if(lbPushed){ lbPushed = false; if(!fromHistory){ try{ history.back(); }catch{} } }   // drop the entry added on open; page stays where it was
 }
+window.addEventListener("popstate", () => closeLightbox(true));
+// Swipe left / right inside the viewer to see the other pack photos
+let lb0 = null;
+$("#lb").addEventListener("touchstart", e => { lb0 = {x: e.touches[0].clientX, y: e.touches[0].clientY}; }, {passive: true});
+$("#lb").addEventListener("touchend", e => { if(!lb0 || lbList.length < 2) return; const t = e.changedTouches[0], dx = t.clientX - lb0.x, dy = t.clientY - lb0.y; lb0 = null;
+  if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) stepLightbox(dx < 0 ? 1 : -1); }, {passive: true});
 $("#lb").addEventListener("click", e => { if(e.target.id === "lb") closeLightbox(); });
 document.addEventListener("keydown", e => {
   if(!$("#lb").classList.contains("open")) return;
